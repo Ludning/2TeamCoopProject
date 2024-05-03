@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e2fe62ebca8fa81478ff840c55ff78de
+  m_SerializeEntries:
+  - m_GUID: d4587bb0b54613845a5487cc93878e8d
+    m_Address: AssaultRifle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bc684ada6cb99374797d7d526ac3e448
+    m_Address: HuntingRifle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 10365b4c55cf9184dab0e045d5938e38
+    m_Address: MachineGun
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 45600a83bed1afb4fae76a4fd6e85de6
+    m_Address: Minigun
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 95c0afe9d28a754458014e953736d692
+    m_Address: RocketLauncher
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0874d31811a8184419fa49bf66a34911
+    m_Address: Shotgun
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1ad6a3c5b2b47af46b8d36e7a1c3eb46
+    m_Address: SniperRifle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4e697b137d7fea8469e2155ec2848b1b
+    m_Address: SubMGun
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: faad616287a686e48b391b55920cb3ff
+    m_Address: CrossBow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b291d10e9791c3441ad521ff8c299ff3
+    m_Address: FlameThrower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: bbf06e2106eafb4428ba669f9d16303a, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5fc2b8e8a090da148bb675949ba0e6d0, type: 2}
+    - {fileID: 11400000, guid: 83f3836f19f214a4799c8529b2918597, type: 2}
