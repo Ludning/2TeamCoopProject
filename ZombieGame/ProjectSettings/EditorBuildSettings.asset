@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/PolygonApocalypse/Scenes/MainScenes.unity
+    path: Assets/Scenes/MainScenes.unity
     guid: 9ca7bdae70c06a546aa612594f2f6ace
   - enabled: 1
-    path: Assets/PolygonApocalypse/Scenes/GamePlay 1.unity
+    path: Assets/Scenes/GamePlay 1.unity
     guid: f604f4529a1fe3c4899232306785067d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: f818d8df8ceac0549bc18be10178e6c0, type: 2}
