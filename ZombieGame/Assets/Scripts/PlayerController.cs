@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour, IMovable
 
     private void Update()
     {
-        moveVector.y -= gravity * Time.deltaTime;
+        if(!IsGrounded())
+            moveVector.y -= gravity * Time.deltaTime;
         //controller.Move는 월드좌표 벡터로 움직이기 때문에 변환해주어야 한다.
         controller.Move(transform.TransformDirection(moveVector) * moveSpeed * runSpeed * Time.deltaTime);
         SetAnimator();
@@ -46,24 +47,23 @@ public class PlayerController : MonoBehaviour, IMovable
 
     private void LateUpdate()
     {
-        //뭔가 이상하긴 한데 상체만 회전한다.
-        spine_01.localRotation = Quaternion.Euler(180 , 0, xRotation);
+        spine_01.RotateAround(spine_01.transform.position, transform.right, xRotation);
     }
 
-    public void OnMove(InputValue input)
+    #region 인풋 시스템 함수
+    public void OnMove(InputAction.CallbackContext context)
     {
-        moveVector = input.Get<Vector3>();
+        moveVector = context.ReadValue<Vector3>();
     }
-
-    public void OnRun(InputValue input)
+    public void OnRun(InputAction.CallbackContext context)
     {
-        if (input.isPressed) runSpeed = 2f;
-        else runSpeed = 1f;
+        if (context.started) runSpeed = 2f;
+        else if (context.performed) { }
+        else if (context.canceled) runSpeed = 1f;
     }
-
-    public void OnLook(InputValue input)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        mouseDelta = input.Get<Vector2>();
+        mouseDelta = context.ReadValue<Vector2>();
         //수평 회전
         float mouseX = mouseDelta.x * mouseSensitivity * Time.deltaTime;
         transform.Rotate(Vector3.up * mouseX);
@@ -71,14 +71,14 @@ public class PlayerController : MonoBehaviour, IMovable
         //수직 회전
         float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime;
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -30f, 50f);
+        xRotation = Mathf.Clamp(xRotation, -89f, 89f);
         cameraAngle.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
-
-    public void OnJump(InputValue input)
+    public void OnJump(InputAction.CallbackContext context)
     {
-        if(IsGrounded()) moveVector.y = jumpForce;
+        if (IsGrounded()) moveVector.y = jumpForce;
     }
+    #endregion
 
     private void SetAnimator()
     {

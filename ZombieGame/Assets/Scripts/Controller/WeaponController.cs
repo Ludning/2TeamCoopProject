@@ -34,6 +34,7 @@ public class WeaponController : MonoBehaviour
         {
             weapon.transform.SetParent(weaponHanger);
             weapon.transform.localPosition = Vector3.zero;
+            weapon.transform.localRotation = Quaternion.identity;
             weapon.GetComponent<IWeapon>().OnEquip();
         });
 
