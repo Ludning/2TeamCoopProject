@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IMovable
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private bool isGrounded = true;
 
+
     float maxDistance = 0.1f;
 
     public Transform cameraAngle;
