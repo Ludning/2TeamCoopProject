@@ -22,4 +22,4 @@ MonoBehaviour:
   ReloadTime: 2.2
   Sound: {fileID: 0}
   projectile: {fileID: 2016465595898338584, guid: 68b488e67c261ad4594e479afc943c90, type: 3}
-  MuzzleFlash: {fileID: 0}
+  MuzzleFlash: {fileID: 1320275964731592, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}

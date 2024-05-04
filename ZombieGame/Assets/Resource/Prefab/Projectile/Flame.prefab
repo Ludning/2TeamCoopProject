@@ -87,6 +87,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
+      propertyPath: TriggerModule.inside
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
+      propertyPath: TriggerModule.colliderQueryMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
+      propertyPath: TriggerModule.primitives.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 19998858, guid: f12e7b5c70fbeac4b99a545b6993f9b9, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1

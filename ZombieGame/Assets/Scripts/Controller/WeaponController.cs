@@ -33,7 +33,8 @@ public class WeaponController : MonoBehaviour
         weaponList.ForEach(weapon => 
         {
             weapon.transform.SetParent(weaponHanger);
-            weapon.transform.position = Vector3.zero; 
+            weapon.transform.localPosition = Vector3.zero;
+            weapon.GetComponent<IWeapon>().OnEquip();
         });
 
         ActiveWeapon(0);
@@ -97,7 +98,7 @@ public class WeaponController : MonoBehaviour
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
         string controlPath = context.control.path;
-
+        Debug.Log(controlPath);
         for (int i = 0; i < weaponList.Count; i++)
         {
             if (controlPath.Contains(i.ToString()))
