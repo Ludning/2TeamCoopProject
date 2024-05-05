@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
     // 탄창 업데이트 
     public void UpdateAmmoText(int magAmmo, int remainAmmo)
     {
-        ammoText.text = magAmmo + "/" + remainAmmo;
+        //ammoText.text = magAmmo + "/" + remainAmmo;
     }
 
     // 점수 업데이트
