@@ -43,10 +43,18 @@ public class Weapon : MonoBehaviour, IWeapon
     {
 
     }
+    public void OnFire()
+    {
+        GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
+        projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
+        magazineAmmoCount--;
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
+    }
     public virtual void OnEquip()
     {
         magazineAmmoCount = weaponData.MaxAmmo;
         invenAmmoCount = weaponData.InvenAmmo;
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
     }
     public virtual void OnFireEnd()
     {
@@ -61,39 +69,5 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         //reloadCoroutine = StartCoroutine(ReloadCoroutine());
     }
-    /*IEnumerator FireCoroutine()
-    {
-        while (true)
-        {
-            if (magazineAmmoCount <= 0)
-                yield break;
-            GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
-            projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
-            magazineAmmoCount--;
-            Debug.Log(magazineAmmoCount);
-            yield return new WaitForSeconds(weaponData.fireRate);
-        }
-    }
-    IEnumerator ReloadCoroutine()
-    {
-        //예비탄환이 없거나 탄창이 꽉 차있으면 진행하지 않는다
-        if (invenAmmoCount == 0 || magazineAmmoCount >= weaponData.MaxAmmo)
-            yield break;
-
-        //재장전 애니메이션 재생
-        //재장전 시간동안 대기
-        yield return new WaitForSeconds(weaponData.ReloadTime);
-
-        //탄약 충전
-        if (invenAmmoCount >= weaponData.MaxAmmo)
-        {
-            invenAmmoCount -= weaponData.MaxAmmo;
-            magazineAmmoCount = weaponData.MaxAmmo;
-        }
-        else
-        {
-            magazineAmmoCount += invenAmmoCount;
-            invenAmmoCount = 0;
-        }
-    }*/
+    
 }

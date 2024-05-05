@@ -30,20 +30,38 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+    private bool isPause;
 
     //게임 score
     private int score = 0;
     //게임오버 체크
     public bool isGameOver { get; private set; }
 
+    public void UpdateAmmo(int magAmmo, int remainAmmo)
+    {
+        UIManager.Instance.UpdateAmmoText(magAmmo, remainAmmo);
+    }
+
     public void AddScore(int newScore)
     {
         score += newScore;
-        UIManager.instance.UpdateScoreText(score);
+        UIManager.Instance.UpdateScoreText(score);
     }
     public void EndGame()
     {
         isGameOver = true;
-        UIManager.instance.SetActiveGameOverUI(true);
+        UIManager.Instance.SetActiveGameOverUI(true);
     }
+    public void Pause()
+    {
+        isPause = !isPause;
+        Time.timeScale = isPause ? 0 : 1;
+        UIManager.Instance.SetActivePauseUI(isPause);
+        Debug.Log("pause?");
+    }
+    public void UpdateHealth(float currentHealth, float maxHealth)
+    {
+        UIManager.Instance.UpdateHpBar(currentHealth, maxHealth);
+    }
+
 }
