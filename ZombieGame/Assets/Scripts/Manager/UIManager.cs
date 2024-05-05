@@ -4,9 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro; 
+
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance;
+    private static UIManager instance;
 
     public static UIManager Instance
     {
@@ -29,48 +31,51 @@ public class UIManager : MonoBehaviour
             return instance;
         }
     }
-    private static UIManager m_instance;
-    public TextMeshProUGUI ammoText;
-    //public TextMeshProUGUI mainammoText;
-    //public TextMeshProUGUI subammoText;
-    //public TextMeshProUGUI grenadeammoText;
-    //public TextMeshProUGUI healammoText;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI waveText;
-    public GameObject gameOverUI;
-    public GameObject gamevictoryUI;
-    public GameObject hpBar;
 
-    //ÅºÃ¢ ¾÷µ¥ÀÌÆ® 
-    public void UpdateAmmoText(int magAmmo,int remainAmmo)
+    public TextMeshProUGUI ammoText; // TextMeshPro ì‚¬ìš©
+    public TMP_Text scoreText; // TextMeshPro ì‚¬ìš©
+    public TMP_Text waveText; // TextMeshPro ì‚¬ìš©
+    public GameObject gameOverUI;
+    public Slider hpBar;
+    public GameObject pauseUI;
+    
+    // íƒ„ì°½ ì—…ë°ì´íŠ¸ 
+    public void UpdateAmmoText(int magAmmo, int remainAmmo)
     {
         ammoText.text = magAmmo + "/" + remainAmmo;
     }
-    //Á¡¼ö ¾÷µ¥ÀÌÆ®
+
+    // ì ìˆ˜ ì—…ë°ì´íŠ¸
     public void UpdateScoreText(int newScore)
     {
         scoreText.text = "Score : " + newScore;
     }
-    //¿şÀÌºê ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+
+    // ì›¨ì´ë¸Œ í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
     public void UpdateWaveText(int waves, int count)
     {
         waveText.text = "Wave : " + waves + "\nEnemy Left : " + count;
     }
-    public void UpdateHpBar(int hpBar)
+
+    // ì²´ë ¥ë°” ì—…ë°ì´íŠ¸
+    public void UpdateHpBar(float currentHp, float maxHp)
     {
-        
+        hpBar.value = currentHp / maxHp;
     }
-    //°ÔÀÓ¿À¹öUI ¾×Æ¼ºê
+
+    // ê²Œì„ì˜¤ë²„UI ì•¡í‹°ë¸Œ
     public void SetActiveGameOverUI(bool active)
     {
         gameOverUI.SetActive(active);
     }
-    //°ÔÀÓ Àç½ÃÀÛ 
+
+    // ê²Œì„ ì¬ì‹œì‘
     public void GameRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+////ìˆ˜ì •í•´ì•¼í•˜ë‚˜?
     public void GameReplay()
     {
         SceneManager.LoadScene(0);
@@ -79,7 +84,7 @@ public class UIManager : MonoBehaviour
     public void OnClickNewGame()
     {
         SceneManager.LoadScene(1);
-        Debug.Log("°ÔÀÓ½ÃÀÛ");
+        Debug.Log("ê²Œì„ì‹œì‘");
     }
     public void OnClickExit()
     {
@@ -89,4 +94,11 @@ public class UIManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+    ////
+    public void SetActivePauseUI(bool isPause)
+    {
+        pauseUI.SetActive(isPause);
+        Debug.Log("isPause true?");
+    }
+
 }

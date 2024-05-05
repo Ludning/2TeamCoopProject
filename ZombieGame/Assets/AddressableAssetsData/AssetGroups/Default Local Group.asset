@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: AssaultRifle
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: faad616287a686e48b391b55920cb3ff
+    m_Address: CrossBow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b291d10e9791c3441ad521ff8c299ff3
+    m_Address: FlameThrower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: bc684ada6cb99374797d7d526ac3e448
     m_Address: HuntingRifle
     m_ReadOnly: 0
@@ -47,14 +55,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 4e697b137d7fea8469e2155ec2848b1b
     m_Address: SubMGun
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: faad616287a686e48b391b55920cb3ff
-    m_Address: CrossBow
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: b291d10e9791c3441ad521ff8c299ff3
-    m_Address: FlameThrower
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

@@ -33,6 +33,9 @@ public class WeaponData : ScriptableObject
     [Header("반동")]
     public float Recoil;
 
+    [Header("반동회복 시간")]
+    public float RecoverySpeed = 1.0f;
+
     //재장전 시간
     [Header("재장전 시간")]
     public float ReloadTime;
