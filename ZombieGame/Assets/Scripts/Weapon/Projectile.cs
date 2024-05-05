@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour, IPoolable
 {
@@ -33,14 +35,17 @@ public class Projectile : MonoBehaviour, IPoolable
         prevPosition = transform.position;
     }
 
-    public void Shot(Transform transform, float speed)
+    public void Shot(Transform firePosition, float speed)
     {
-        this.transform.position = transform.position;
-        direction = transform.forward;
+        rb.isKinematic = true;
+        rb.isKinematic = false;
+        this.transform.position = firePosition.position;
+        this.transform.rotation = firePosition.rotation;
+        direction = firePosition.forward;// firePosition.localRotation * firePosition.forward;//firePosition.localRotation * Vector3.forward; ;//firePosition.forward * firePosition.localRotation;
         this.speed = speed;
 
         //이전 위치 기록
-        prevPosition = transform.position;
+        prevPosition = this.transform.position;
 
         rb.AddForce(direction * speed, ForceMode.Impulse);
         Invoke("DestroyObject", 5.0f);
@@ -48,6 +53,12 @@ public class Projectile : MonoBehaviour, IPoolable
 
     public void DestroyObject()
     {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.ResetInertiaTensor();
+        rb.ResetCenterOfMass();
+
         PoolManager.Instance.ReturnToPool(gameObject);
     }
+
 }
