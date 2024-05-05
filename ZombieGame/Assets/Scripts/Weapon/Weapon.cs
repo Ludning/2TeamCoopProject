@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour, IWeapon
     protected Transform magazineTransform;
     [SerializeField]
     protected GameObject magazineObject;
-    //ÀçÀåÀü¿ë
+    //Ã€Ã§Ã€Ã¥Ã€Ã¼Â¿Ã«
     protected GameObject reloadMagazineObject;
     public WeaponData WeaponData { get { return weaponData; } }
 
@@ -81,10 +81,18 @@ public class Weapon : MonoBehaviour, IWeapon
     {
 
     }
+    public void OnFire()
+    {
+        GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
+        projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
+        magazineAmmoCount--;
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
+    }
     public virtual void OnEquip()
     {
         magazineAmmoCount = weaponData.MaxAmmo;
         invenAmmoCount = weaponData.InvenAmmo;
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
     }
     public virtual void OnFireEnd()
     {
@@ -94,5 +102,5 @@ public class Weapon : MonoBehaviour, IWeapon
     }
     public virtual void OnReload(Action OnReloadAnimation, Action ExitReloadAnimation)
     {
-    }
+
 }
