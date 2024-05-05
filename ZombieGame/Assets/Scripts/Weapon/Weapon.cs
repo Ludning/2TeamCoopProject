@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,19 +14,56 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField]
     protected Transform leftHandGrip;
     [SerializeField]
-    public Transform magazineTransform;
+    protected Transform magazineTransform;
+    [SerializeField]
+    protected GameObject magazineObject;
+    //Ã€Ã§Ã€Ã¥Ã€Ã¼Â¿Ã«
+    protected GameObject reloadMagazineObject;
     public WeaponData WeaponData { get { return weaponData; } }
+
+    [SerializeField]
+    private Transform weaponMesh;
 
     protected Coroutine fireCoroutine;
     protected Coroutine reloadCoroutine;
 
-
     protected int magazineAmmoCount;
     protected int invenAmmoCount;
 
+    protected Action<float> aimReaction;
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        Vector3 pos = firePosition.position;
+        Debug.DrawLine(pos, pos + firePosition.forward * 10, Color.red);
+    }
+#endif
+    private void Awake()
+    {
+        if(magazineObject!= null)
+        {
+            reloadMagazineObject = Instantiate(magazineObject);
+            reloadMagazineObject.transform.SetParent(transform);
+            reloadMagazineObject.transform.localPosition = Vector3.zero;
+            reloadMagazineObject.SetActive(false);
+        }
+    }
+    public float GetRecoverySpeed()
+    {
+        return weaponData.RecoverySpeed;
+    }
     public virtual Transform GetMagazineTransform()
     {
         return magazineTransform;
+    }
+    public virtual GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+    public virtual Transform GetWeaponTransform()
+    {
+        return weaponMesh;
     }
     public virtual Transform GetRightHandGrip()
     {
@@ -43,57 +81,26 @@ public class Weapon : MonoBehaviour, IWeapon
     {
 
     }
+    public void OnFire()
+    {
+        GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
+        projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
+        magazineAmmoCount--;
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
+    }
     public virtual void OnEquip()
     {
         magazineAmmoCount = weaponData.MaxAmmo;
         invenAmmoCount = weaponData.InvenAmmo;
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
     }
     public virtual void OnFireEnd()
     {
-        /*if (fireCoroutine != null)
-            StopCoroutine(fireCoroutine);*/
     }
-    public virtual void OnFireStart()
+    public virtual void OnFireStart(Action<float> aimReaction)
     {
-        //fireCoroutine = StartCoroutine(FireCoroutine());
     }
-    public virtual void OnReload()
+    public virtual void OnReload(Action OnReloadAnimation, Action ExitReloadAnimation)
     {
-        //reloadCoroutine = StartCoroutine(ReloadCoroutine());
-    }
-    /*IEnumerator FireCoroutine()
-    {
-        while (true)
-        {
-            if (magazineAmmoCount <= 0)
-                yield break;
-            GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
-            projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
-            magazineAmmoCount--;
-            Debug.Log(magazineAmmoCount);
-            yield return new WaitForSeconds(weaponData.fireRate);
-        }
-    }
-    IEnumerator ReloadCoroutine()
-    {
-        //¿¹ºñÅºÈ¯ÀÌ ¾ø°Å³ª ÅºÃ¢ÀÌ ²Ë Â÷ÀÖÀ¸¸é ÁøÇàÇÏÁö ¾Ê´Â´Ù
-        if (invenAmmoCount == 0 || magazineAmmoCount >= weaponData.MaxAmmo)
-            yield break;
 
-        //ÀçÀåÀü ¾Ö´Ï¸ÞÀÌ¼Ç Àç»ý
-        //ÀçÀåÀü ½Ã°£µ¿¾È ´ë±â
-        yield return new WaitForSeconds(weaponData.ReloadTime);
-
-        //Åº¾à ÃæÀü
-        if (invenAmmoCount >= weaponData.MaxAmmo)
-        {
-            invenAmmoCount -= weaponData.MaxAmmo;
-            magazineAmmoCount = weaponData.MaxAmmo;
-        }
-        else
-        {
-            magazineAmmoCount += invenAmmoCount;
-            invenAmmoCount = 0;
-        }
-    }*/
 }
