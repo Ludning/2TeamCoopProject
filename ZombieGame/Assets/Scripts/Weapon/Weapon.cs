@@ -96,11 +96,14 @@ public class Weapon : MonoBehaviour, IWeapon
     }
     public virtual void OnFireEnd()
     {
+
     }
     public virtual void OnFireStart(Action<float> aimReaction)
     {
+
     }
     public virtual void OnReload(Action OnReloadAnimation, Action ExitReloadAnimation)
     {
 
+    }
 }
