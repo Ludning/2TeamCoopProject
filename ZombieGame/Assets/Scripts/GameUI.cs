@@ -6,30 +6,6 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public enum InfoType { WaveLevel, Inventory, Time, Hp, Kill }
-    public InfoType type;
-
-    Text myText;
-    Slider mySlider;
-
-    void Awake()
-    {
-        myText = GetComponent<Text>();
-        mySlider = GetComponent<Slider>();
-    }
-
-    public void LateUpdate()
-    {
-        switch (type)
-        {
-            case InfoType.Time:
-                float remainTime = UHD.instance.maxGameTime - UHD.instance.gameTime;
-                int min = Mathf.FloorToInt(remainTime / 60);
-                int sec = Mathf.FloorToInt(remainTime % 60);
-                myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
-                break;
-        }
-    }
     public void GameReplay()
     {
         SceneManager.LoadScene(0);

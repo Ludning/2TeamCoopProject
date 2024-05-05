@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,10 +30,15 @@ public class UIManager : MonoBehaviour
         }
     }
     private static UIManager m_instance;
-    public Text ammoText;
-    public Text scoreText;
-    public Text waveText;
+    public TextMeshProUGUI ammoText;
+    //public TextMeshProUGUI mainammoText;
+    //public TextMeshProUGUI subammoText;
+    //public TextMeshProUGUI grenadeammoText;
+    //public TextMeshProUGUI healammoText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI waveText;
     public GameObject gameOverUI;
+    public GameObject gamevictoryUI;
     public GameObject hpBar;
 
     //탄창 업데이트 
@@ -63,5 +69,24 @@ public class UIManager : MonoBehaviour
     public void GameRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GameReplay()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void OnClickNewGame()
+    {
+        SceneManager.LoadScene(1);
+        Debug.Log("게임시작");
+    }
+    public void OnClickExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
