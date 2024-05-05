@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,51 +32,69 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
-
-    public TextMeshProUGUI ammoText; // TextMeshPro »ç¿ë
-    public TMP_Text scoreText; // TextMeshPro »ç¿ë
-    public TMP_Text waveText; // TextMeshPro »ç¿ë
+    public TextMeshProUGUI ammoText; // TextMeshPro ì‚¬ìš©
+    public TMP_Text scoreText; // TextMeshPro ì‚¬ìš©
+    public TMP_Text waveText; // TextMeshPro ì‚¬ìš©
     public GameObject gameOverUI;
     public Slider hpBar;
     public GameObject pauseUI;
-
-    // ÅºÃ¢ ¾÷µ¥ÀÌÆ® 
+    
+    // íƒ„ì°½ ì—…ë°ì´íŠ¸ 
     public void UpdateAmmoText(int magAmmo, int remainAmmo)
     {
         ammoText.text = magAmmo + "/" + remainAmmo;
     }
 
-    // Á¡¼ö ¾÷µ¥ÀÌÆ®
+    // ì ìˆ˜ ì—…ë°ì´íŠ¸
     public void UpdateScoreText(int newScore)
     {
         scoreText.text = "Score : " + newScore;
     }
 
-    // ¿şÀÌºê ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+    // ì›¨ì´ë¸Œ í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
     public void UpdateWaveText(int waves, int count)
     {
         waveText.text = "Wave : " + waves + "\nEnemy Left : " + count;
     }
 
-    // Ã¼·Â¹Ù ¾÷µ¥ÀÌÆ®
+    // ì²´ë ¥ë°” ì—…ë°ì´íŠ¸
     public void UpdateHpBar(float currentHp, float maxHp)
     {
         hpBar.value = currentHp / maxHp;
     }
 
-    // °ÔÀÓ¿À¹öUI ¾×Æ¼ºê
+    // ê²Œì„ì˜¤ë²„UI ì•¡í‹°ë¸Œ
     public void SetActiveGameOverUI(bool active)
     {
         gameOverUI.SetActive(active);
     }
 
-    // °ÔÀÓ Àç½ÃÀÛ
+    // ê²Œì„ ì¬ì‹œì‘
     public void GameRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+////ìˆ˜ì •í•´ì•¼í•˜ë‚˜?
+    public void GameReplay()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void OnClickNewGame()
+    {
+        SceneManager.LoadScene(1);
+        Debug.Log("ê²Œì„ì‹œì‘");
+    }
+    public void OnClickExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    ////
     public void SetActivePauseUI(bool isPause)
     {
         pauseUI.SetActive(isPause);
