@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+
     public TextMeshProUGUI ammoText; // TextMeshPro 사용
     public TMP_Text scoreText; // TextMeshPro 사용
     public TMP_Text waveText; // TextMeshPro 사용
@@ -74,10 +76,10 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // 일시정지 UI 액티브
     public void SetActivePauseUI(bool isPause)
     {
         pauseUI.SetActive(isPause);
         Debug.Log("isPause true?");
     }
+
 }

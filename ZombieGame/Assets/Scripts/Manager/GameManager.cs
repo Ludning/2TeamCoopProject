@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+
     private bool isPause;
 
     //게임 score
@@ -37,21 +38,27 @@ public class GameManager : MonoBehaviour
     //게임오버 체크
     public bool isGameOver { get; private set; }
 
+
     public void UpdateAmmo(int magAmmo, int remainAmmo)
     {
         UIManager.Instance.UpdateAmmoText(magAmmo, remainAmmo);
     }
+
+
+    //점수 추가
 
     public void AddScore(int newScore)
     {
         score += newScore;
         UIManager.Instance.UpdateScoreText(score);
     }
+    //게임오버
     public void EndGame()
     {
         isGameOver = true;
         UIManager.Instance.SetActiveGameOverUI(true);
     }
+
     public void Pause()
     {
         isPause = !isPause;
@@ -62,6 +69,7 @@ public class GameManager : MonoBehaviour
     public void UpdateHealth(float currentHealth, float maxHealth)
     {
         UIManager.Instance.UpdateHpBar(currentHealth, maxHealth);
+
     }
 
 }
