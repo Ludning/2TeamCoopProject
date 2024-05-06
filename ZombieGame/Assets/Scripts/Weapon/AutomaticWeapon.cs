@@ -38,10 +38,7 @@ public class AutomaticWeapon : Weapon
                 StopMuzzleFlash();
                 yield break; 
             }
-            PlayMuzzleFlash();
-            GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
-            projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
-            magazineAmmoCount--;
+            OnFire();
             Debug.Log(magazineAmmoCount);
             aimReaction?.Invoke(weaponData.Recoil);
             yield return new WaitForSeconds(weaponData.fireRate);
