@@ -96,6 +96,7 @@ Transform:
   - {fileID: 6300301145078583105}
   - {fileID: 3150295856705109970}
   - {fileID: 9034974047088229394}
+  - {fileID: 7192874761893521765}
   m_Father: {fileID: 4831393376940278735}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2108,6 +2109,37 @@ Transform:
   m_Father: {fileID: 154699707462862125}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6507247222874368707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7192874761893521765}
+  m_Layer: 0
+  m_Name: Stone Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7192874761893521765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6507247222874368707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.062, y: -0.144, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4155739854267775194}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6675742541909692095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,6 +2833,9 @@ MonoBehaviour:
   attackDamage: 20
   traceSpeed: 3.5
   isDie: 0
+  stonePrefab: {fileID: 2978209606209768982, guid: 40ff5e866a86c224ab082a5af0627eac, type: 3}
+  stonePoint: {fileID: 7192874761893521765}
+  stone: {fileID: 0}
 --- !u!136 &-2502613479065705169
 CapsuleCollider:
   m_ObjectHideFlags: 0

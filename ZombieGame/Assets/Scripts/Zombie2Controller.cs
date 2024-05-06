@@ -17,8 +17,12 @@ public class Zombie2Controller : MonoBehaviour
     public float attackDistance = 2.0f;
     public float attackDamage = 20f;
     public float traceSpeed = 3.5f;
-
     public bool isDie = false;
+
+    public GameObject stonePrefab;
+    public Transform stonePoint;
+    public GameObject stone;
+    private float throwSpeed = 10f;
 
     private Transform monsterTr;
     private Transform playerTr;
@@ -106,9 +110,21 @@ public class Zombie2Controller : MonoBehaviour
         playerTr.GetComponent<LivingEntity>().ApplyDamage(damageMessage);
     }
 
+    public void PickupStone()
+    {
+        Debug.Log("돌 생성");
+        stone = Instantiate(stonePrefab, stonePoint);
+        stone.transform.localPosition = Vector3.zero;
+        Debug.Log(monsterTr.position);
+        monsterTr.GetChild(0).LookAt(playerTr.position);//안돌아보네?
+    }
+
     public void ThrowRockToPlayer()
     {
         Debug.Log("돌 던지기");
+        Vector3 throwVector = (playerTr.position + new Vector3(0, 1.2f, 0) - stonePoint.position).normalized;
+        stone.transform.parent = null;
+        stone.GetComponent<Rigidbody>().AddForce(throwVector * throwSpeed, ForceMode.Impulse);
     }
 
     private class BaseMonsterState : BaseState
