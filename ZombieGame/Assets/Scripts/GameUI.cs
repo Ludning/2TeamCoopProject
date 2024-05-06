@@ -15,8 +15,8 @@ public class GameUI : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         Debug.Log("게임시작");
-        UHD.instance.hp = UHD.instance.maxhp;
     }
+
     public void OnClickExit()
     {
 #if UNITY_EDITOR

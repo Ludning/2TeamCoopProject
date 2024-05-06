@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-<<<<<<< Updated upstream
-=======
 using TMPro;
->>>>>>> Stashed changes
 using UnityEngine;
 
 public class Result : MonoBehaviour

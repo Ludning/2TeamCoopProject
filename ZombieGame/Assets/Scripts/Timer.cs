@@ -8,14 +8,6 @@ public class Timer : MonoBehaviour
     public static Timer instance;
     [SerializeField] TextMeshProUGUI timertext;
     [SerializeField] public float currentTime;
-<<<<<<< Updated upstream
-
-    void Awake()
-    {
-        instance = this;
-    }
-=======
->>>>>>> Stashed changes
 
     public void Awake()
     {

@@ -17,19 +17,14 @@ public class UHD : MonoBehaviour
     [Header("#PLAYER INFO")]
     public float hp;
     public float maxhp = 100;
-<<<<<<< Updated upstream
     public int Wavelevel;
     public int kill;
     [Header("#GAME OBJECT")]
     public Result uiResult;
 
-=======
     public int Score;
     public int Wave;
     public int[] NextWave = { 20, 20, 20, 20, 20 };
-    [Header("#GAME OBJECT")]
-    public Result uiResult;
->>>>>>> Stashed changes
 
 
     public enum InfoType { WaveLevel, Inventory, Time, Hp, Kill, Score }
