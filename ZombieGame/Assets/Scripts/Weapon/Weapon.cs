@@ -33,6 +33,8 @@ public class Weapon : MonoBehaviour, IWeapon
     protected Action<float> aimReaction;
 
     ParticleSystem muzzleFlash;
+
+    protected int weaponSlotIndex;
     public ParticleSystem MuzzleFlash
     {
         get
@@ -66,6 +68,10 @@ public class Weapon : MonoBehaviour, IWeapon
             reloadMagazineObject.transform.localPosition = Vector3.zero;
             reloadMagazineObject.SetActive(false);
         }
+    }
+    public void SetIndex(int index)
+    {
+        weaponSlotIndex = index;
     }
     public void PlayMuzzleFlash()
     {
@@ -119,14 +125,15 @@ public class Weapon : MonoBehaviour, IWeapon
         GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
         projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
         magazineAmmoCount--;
-        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount, weaponSlotIndex);
     }
-    public virtual void OnEquip()
+    public virtual void OnEquip(int index)
     {
+        SetIndex(index);
         StopMuzzleFlash();
         magazineAmmoCount = weaponData.MaxAmmo;
         invenAmmoCount = weaponData.InvenAmmo;
-        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount, weaponSlotIndex);
     }
     public virtual void OnFireEnd()
     {

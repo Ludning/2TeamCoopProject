@@ -7,6 +7,8 @@ public interface IWeapon
 {
     //무기 정보
     public WeaponData WeaponData { get; }
+
+    public void SetIndex(int index);
     public void PlayMuzzleFlash();
     public void StopMuzzleFlash();
     public Transform GetReloadMagazineTransform();
@@ -22,7 +24,7 @@ public interface IWeapon
     //재장전
     public void OnReload(Action<float> OnReloadAnimation, Action ExitReloadAnimation);
     //장착
-    public void OnEquip();
+    public void OnEquip(int index);
     //발사 클릭 시작
     public void OnFireStart(Action<float> aimReaction);
     //발사 클릭 종료

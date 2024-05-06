@@ -71,5 +71,6 @@ public class AutomaticWeapon : Weapon
             magazineAmmoCount += invenAmmoCount;
             invenAmmoCount = 0;
         }
+        UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount, weaponSlotIndex);
     }
 }

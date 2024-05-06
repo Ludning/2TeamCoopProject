@@ -32,17 +32,41 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public TextMeshProUGUI ammoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon1AmmoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon2AmmoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon3AmmoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon4AmmoText; // TextMeshPro 사용
     public TMP_Text scoreText; // TextMeshPro 사용
     public TMP_Text waveText; // TextMeshPro 사용
     public GameObject gameOverUI;
     public Slider hpBar;
     public GameObject pauseUI;
+    public GameObject GameReplayUI;
+
+    public void ShowReplayUI()
+    {
+        GameReplayUI.SetActive(true);
+    }
     
     // 탄창 업데이트 
-    public void UpdateAmmoText(int magAmmo, int remainAmmo)
+    public void UpdateAmmoText(int magAmmo, int remainAmmo, int weaponSlotIndex)
     {
-        //ammoText.text = magAmmo + "/" + remainAmmo;
+        switch(weaponSlotIndex)
+        {
+            case 0:
+                weapon1AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+            case 1:
+                weapon2AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+            case 2:
+                weapon3AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+            case 3:
+                weapon4AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+        }
+        
     }
 
     // 점수 업데이트
@@ -52,9 +76,9 @@ public class UIManager : MonoBehaviour
     }
 
     // 웨이브 텍스트 업데이트
-    public void UpdateWaveText(int waves, int count)
+    public void UpdateWaveText(int waves)
     {
-        waveText.text = "Wave : " + waves + "\nEnemy Left : " + count;
+        waveText.text = "Wave : " + waves;
     }
 
     // 체력바 업데이트

@@ -95,7 +95,7 @@ public class WeaponController : MonoBehaviour
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
             IWeapon wp = weapon.GetComponent<IWeapon>();
-            wp.OnEquip();
+            wp.OnEquip(weaponList.IndexOf(weapon));
         });
 
         ActiveWeapon(0);
