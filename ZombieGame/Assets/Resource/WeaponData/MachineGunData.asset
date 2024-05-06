@@ -17,8 +17,9 @@ MonoBehaviour:
   velocity: 880
   fireMode: 1
   MaxAmmo: 100
-  InvenAmmo: 200
+  InvenAmmo: 900
   Recoil: 6
+  RecoverySpeed: 1
   ReloadTime: 3.5
   Sound: {fileID: 0}
   projectile: {fileID: 2016465595898338584, guid: 68b488e67c261ad4594e479afc943c90, type: 3}

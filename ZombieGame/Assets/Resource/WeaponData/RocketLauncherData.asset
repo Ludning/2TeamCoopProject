@@ -17,7 +17,7 @@ MonoBehaviour:
   velocity: 300
   fireMode: 0
   MaxAmmo: 1
-  InvenAmmo: 5
+  InvenAmmo: 50
   Recoil: 8
   RecoverySpeed: 1
   ReloadTime: 4
