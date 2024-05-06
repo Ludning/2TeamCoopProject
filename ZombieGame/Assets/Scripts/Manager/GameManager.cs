@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
                 {
                     instance = go.AddComponent<GameManager>();
                 }
-                DontDestroyOnLoad(go);
+                //DontDestroyOnLoad(go);
             }
             return instance;
         }
@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         score += newScore;
         UIManager.Instance.UpdateScoreText(score);
+
     }
     //웨이브 변경
     public void AddWave()
