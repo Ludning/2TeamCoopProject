@@ -30,5 +30,4 @@ public class Timer : MonoBehaviour
         int sec = Mathf.FloorToInt(currentTime % 60);
         timertext.text = string.Format("{0:00}:{1:00}", min, sec);
     }
-
 }

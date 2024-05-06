@@ -70,7 +70,8 @@ public class Zombie2Controller : MonoBehaviour, IInitable
     {
         isDie = false;
         stateMachine.InitState(State.IDLE);
-        Debug.Log(playerTr);
+
+        playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
         StartCoroutine(CheckMonsterState());
     }
 

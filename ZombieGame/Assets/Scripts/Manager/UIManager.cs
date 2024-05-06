@@ -4,7 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
@@ -26,10 +27,15 @@ public class UIManager : MonoBehaviour
                 {
                     instance = ui.AddComponent<UIManager>();
                 }
-                DontDestroyOnLoad(ui);
+                //DontDestroyOnLoad(ui);
             }
             return instance;
         }
+    }
+
+    private void Awake()
+    {
+        instance = this;
     }
 
     public TextMeshProUGUI weapon1AmmoText; // TextMeshPro 사용
