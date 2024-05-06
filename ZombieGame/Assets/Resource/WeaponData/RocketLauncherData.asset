@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f6df0e476d5044a9e716ff7f3d93bf, type: 3}
   m_Name: RocketLauncherData
   m_EditorClassIdentifier: 
-  Damage: 90
+  Damage: 200
   fireRate: 3
   velocity: 300
   fireMode: 0
   MaxAmmo: 1
   InvenAmmo: 5
   Recoil: 8
+  RecoverySpeed: 1
   ReloadTime: 4
   Sound: {fileID: 0}
   projectile: {fileID: 3898657088375906351, guid: 50c7e17ff2988da4b9c665a0ca04acf1, type: 3}

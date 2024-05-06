@@ -25,8 +25,9 @@ public class RocketProjectile : Projectile
         {
             if(collider.CompareTag("Monster"))
             {
-                //collider.GetComponent<IDamageable>().OnDamage();
-                Debug.Log($"HitMonster : {collider.gameObject.name}");
+                DamageMessage damageMessage = new DamageMessage();
+                damageMessage.damage = damage;
+                collider.transform.GetComponent<IDamageable>().ApplyDamage(damageMessage);
             }
         }
     }

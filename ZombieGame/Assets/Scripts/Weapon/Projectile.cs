@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour, IPoolable
 
     Vector3 prevPosition;
 
-    float damage;
+    protected float damage;
 
     [SerializeField]
     GameObject hitEnvirPaticle;
