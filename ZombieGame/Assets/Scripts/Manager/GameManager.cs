@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateAmmoText(magAmmo, remainAmmo);
     }
 
-
     //점수 추가
 
     public void AddScore(int newScore)
@@ -77,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        //Timer.instance.currentTime -= Time.deltaTime;
         if (Timer.instance.currentTime <= 0)
         {
             GameVictroy();
