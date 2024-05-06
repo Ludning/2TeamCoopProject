@@ -19,7 +19,8 @@ MonoBehaviour:
   MaxAmmo: 200
   InvenAmmo: 400
   Recoil: 4
+  RecoverySpeed: 1
   ReloadTime: 5
-  Sound: {fileID: 0}
+  Sound: {fileID: 8300000, guid: 48283adefda01514e851c40517a63d59, type: 3}
   projectile: {fileID: 2016465595898338584, guid: 68b488e67c261ad4594e479afc943c90, type: 3}
   MuzzleFlash: {fileID: 1320275964731592, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}

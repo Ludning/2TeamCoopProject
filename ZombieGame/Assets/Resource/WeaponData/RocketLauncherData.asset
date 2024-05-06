@@ -21,6 +21,6 @@ MonoBehaviour:
   Recoil: 8
   RecoverySpeed: 1
   ReloadTime: 4
-  Sound: {fileID: 0}
+  Sound: {fileID: 8300000, guid: 1df1429981f76644097c7fd47fc5f239, type: 3}
   projectile: {fileID: 3898657088375906351, guid: 50c7e17ff2988da4b9c665a0ca04acf1, type: 3}
   MuzzleFlash: {fileID: 0}

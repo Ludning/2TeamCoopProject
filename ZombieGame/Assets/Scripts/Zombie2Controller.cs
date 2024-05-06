@@ -3,7 +3,7 @@ using UnityEngine;
 
 using UnityEngine.AI;
 
-public class Zombie2Controller : MonoBehaviour
+public class Zombie2Controller : MonoBehaviour, IInitable
 {
     public enum State
     {
@@ -61,11 +61,18 @@ public class Zombie2Controller : MonoBehaviour
     }
 
 
-    private void Start()
+    /*private void Start()
     {
         StartCoroutine(CheckMonsterState());
-    }
+    }*/
 
+    public void Init()
+    {
+        isDie = false;
+        stateMachine.InitState(State.IDLE);
+        Debug.Log(playerTr);
+        StartCoroutine(CheckMonsterState());
+    }
 
     private IEnumerator CheckMonsterState()
     {

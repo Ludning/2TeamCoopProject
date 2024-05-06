@@ -33,7 +33,9 @@ public class SpawnManager : MonoBehaviour
                     GameObject monster = PoolManager.Instance.GetGameObject(MonsterPrefabs[Random.Range(0, MonsterPrefabs.Count)]);
                     Debug.Log(monster.GetComponent<MonsterController>());
                     Debug.Log(spawnPoint.transform.position);
-                    monster.GetComponent<MonsterMove>().SetupPosition(spawnPoint.transform.position);
+                    MonsterInitialize init = monster.GetComponent<MonsterInitialize>();
+                    init.Init();
+                    init.SetupPosition(spawnPoint.transform.position);
                     MonsterList.Add(monster.GetComponent<LivingEntity>());
                 }
                 else

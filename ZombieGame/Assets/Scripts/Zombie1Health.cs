@@ -40,6 +40,7 @@ public class Zombie1Health : LivingEntity
 
     public void Disappear()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        PoolManager.Instance.ReturnToPool(gameObject);
     }
 }

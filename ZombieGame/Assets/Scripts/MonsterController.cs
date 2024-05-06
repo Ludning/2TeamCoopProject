@@ -3,7 +3,7 @@ using UnityEngine;
 
 using UnityEngine.AI;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviour, IInitable
 {
     public enum State
     {
@@ -52,11 +52,17 @@ public class MonsterController : MonoBehaviour
         this.attackDamage = attackDamage;
     }
 
-    private void Start()
+    /*private void Start()
     {
         StartCoroutine(CheckMonsterState());
-    }
+    }*/
 
+    public void Init()
+    {
+        isDie = false;
+        stateMachine.InitState(State.IDLE);
+        StartCoroutine(CheckMonsterState());
+    }
 
     private IEnumerator CheckMonsterState()
     {

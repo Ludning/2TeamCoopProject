@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterMove : MonoBehaviour
+public class MonsterInitialize : MonoBehaviour
 {
     [SerializeField]
     NavMeshAgent agent;
@@ -14,5 +14,9 @@ public class MonsterMove : MonoBehaviour
         transform.position = position;
         agent.enabled = true;
         gameObject.SetActive(true);
+    }
+    public void Init()
+    {
+        gameObject.GetComponent<IInitable>().Init();
     }
 }
