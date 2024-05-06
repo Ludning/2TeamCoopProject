@@ -109,7 +109,7 @@ public class WeaponController : MonoBehaviour
     }
     private void Update()
     {
-        if(playerHealth.IsDead) aimRig.weight = 0;//�ӽ÷� �̷��� ����
+        if(playerHealth.IsDead) aimRig.weight = 0;
 
         leftHandTarget.position = currentWeapon.GetLeftHandGrip().position;
         leftHandTarget.rotation = currentWeapon.GetLeftHandGrip().rotation;
