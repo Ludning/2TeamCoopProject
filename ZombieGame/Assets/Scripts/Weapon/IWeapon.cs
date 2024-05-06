@@ -7,7 +7,9 @@ public interface IWeapon
 {
     //무기 정보
     public WeaponData WeaponData { get; }
-    public Transform GetMagazineTransform();
+    public void PlayMuzzleFlash();
+    public void StopMuzzleFlash();
+    public Transform GetReloadMagazineTransform();
     public GameObject GetGameObject();
     public Transform GetWeaponTransform();
     public Transform GetRightHandGrip();
@@ -18,11 +20,12 @@ public interface IWeapon
     //조준
     public void OnAim();
     //재장전
-    public void OnReload(Action OnReloadAnimation, Action ExitReloadAnimation);
+    public void OnReload(Action<float> OnReloadAnimation, Action ExitReloadAnimation);
     //장착
     public void OnEquip();
     //발사 클릭 시작
     public void OnFireStart(Action<float> aimReaction);
     //발사 클릭 종료
     public void OnFireEnd();
+    public void AddAmmo();
 }

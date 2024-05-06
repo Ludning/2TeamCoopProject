@@ -32,6 +32,24 @@ public class Weapon : MonoBehaviour, IWeapon
 
     protected Action<float> aimReaction;
 
+    ParticleSystem muzzleFlash;
+    public ParticleSystem MuzzleFlash
+    {
+        get
+        {
+            if (weaponData.MuzzleFlash != null)
+            {
+                if (muzzleFlash == null)
+                {
+                    GameObject go = Instantiate(weaponData.MuzzleFlash, firePosition);
+                    muzzleFlash = go.GetComponent<ParticleSystem>();
+                }
+                return muzzleFlash;
+            }
+            return null;
+        }
+    }
+
 #if UNITY_EDITOR
     private void Update()
     {
@@ -49,13 +67,27 @@ public class Weapon : MonoBehaviour, IWeapon
             reloadMagazineObject.SetActive(false);
         }
     }
+    public void PlayMuzzleFlash()
+    {
+        if (MuzzleFlash != null)
+        {
+            MuzzleFlash.Play();
+        }
+    }
+    public void StopMuzzleFlash()
+    {
+        if(MuzzleFlash != null)
+        {
+            MuzzleFlash.Stop();
+        }
+    }
     public float GetRecoverySpeed()
     {
         return weaponData.RecoverySpeed;
     }
-    public virtual Transform GetMagazineTransform()
+    public virtual Transform GetReloadMagazineTransform()
     {
-        return magazineTransform;
+        return reloadMagazineObject.transform;
     }
     public virtual GameObject GetGameObject()
     {
@@ -83,6 +115,7 @@ public class Weapon : MonoBehaviour, IWeapon
     }
     public void OnFire()
     {
+        PlayMuzzleFlash();
         GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
         projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
         magazineAmmoCount--;
@@ -90,6 +123,7 @@ public class Weapon : MonoBehaviour, IWeapon
     }
     public virtual void OnEquip()
     {
+        StopMuzzleFlash();
         magazineAmmoCount = weaponData.MaxAmmo;
         invenAmmoCount = weaponData.InvenAmmo;
         UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount);
@@ -102,8 +136,12 @@ public class Weapon : MonoBehaviour, IWeapon
     {
 
     }
-    public virtual void OnReload(Action OnReloadAnimation, Action ExitReloadAnimation)
+    public virtual void OnReload(Action<float> OnReloadAnimation, Action ExitReloadAnimation)
     {
 
+    }
+    public virtual void AddAmmo()
+    {
+        invenAmmoCount += 30;
     }
 }
