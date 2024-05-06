@@ -24,7 +24,10 @@ public class WeaponController : MonoBehaviour
     Rig aimRig;
 
     [SerializeField]
+    Transform LeftHand;
+    [SerializeField]
     Transform RightHand;
+
     List<GameObject> reloadList = new List<GameObject>();
 
     //사격 조준 IK
@@ -48,7 +51,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     Transform rightHandTarget;
 
-    
+    float prevAnimationSpeed;
 
     [SerializeField]
     Transform aimPosition;
@@ -84,7 +87,8 @@ public class WeaponController : MonoBehaviour
             weapon.transform.SetParent(weaponHanger);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
-            weapon.GetComponent<IWeapon>().OnEquip();
+            IWeapon wp = weapon.GetComponent<IWeapon>();
+            wp.OnEquip();
         });
 
         ActiveWeapon(0);
@@ -92,6 +96,7 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        AimScreenPosition = AimScreenCenterPosition;
     }
     private void Update()
     {
@@ -202,28 +207,32 @@ public class WeaponController : MonoBehaviour
     //무기 활성화
     public void ActiveWeapon(int index)
     {
-        weaponList.ForEach(weapon => weapon.SetActive(false));
+        weaponList.ForEach(weapon => { weaponList[index].GetComponent<IWeapon>().StopMuzzleFlash(); weapon.SetActive(false); });
         weaponList[index].SetActive(true);
         currentWeapon = weaponList[index].GetComponent<IWeapon>();
-
-        //GunAimConstraint.data.constrainedObject = currentWeapon.GetWeaponTransform();
-
-        //reloadHandConstrain.data.sourceObjects = weaponList[index].transform;
-
-        //LeftIKConstraint.data.target = currentWeapon.GetLeftHandGrip();
-        //RightIKConstraint.data.target = currentWeapon.GetRightHandGrip();
+        currentWeapon.StopMuzzleFlash();
     }
-    public void StartReloadAnimation()
+    public void StartReloadAnimation(float reloadTime)
     {
         animator.SetTrigger("IsReload");
 
         aimRig.weight = 0;
         //reloadRig.weight = 1;
+        //LeftHand
+
+        prevAnimationSpeed = animator.speed;
+        //재장전 애니매이션 재생 속도 계산
+        float animationSpeed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / reloadTime;
+        // 애니메이션의 재생 속도 설정
+        animator.speed = animationSpeed;
+
         currentWeapon.GetGameObject().transform.SetParent(RightHand);// + currentWeapon.GetRightHandGrip().localPosition;
         currentWeapon.GetGameObject().transform.localPosition -= currentWeapon.GetRightHandGrip().localPosition;
     }
     public void EndReloadAnimation()
     {
+        animator.speed = prevAnimationSpeed;
+
         aimRig.weight = 1;
         //reloadRig.weight = 0;
         currentWeapon.GetGameObject().transform.SetParent(weaponHanger);

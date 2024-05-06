@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour, IPoolable
     Vector3 prevPosition;
 
     // Update is called once per frame
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         RaycastHit hit;
         Vector3 normalize = (transform.position - prevPosition).normalized;

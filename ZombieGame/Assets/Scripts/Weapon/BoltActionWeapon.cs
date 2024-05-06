@@ -23,7 +23,7 @@ public class BoltActionWeapon : Weapon
         this.aimReaction = aimReaction;
         fireCoroutine = StartCoroutine(FireCoroutine());
     }
-    public override void OnReload(Action OnReloadAnimation, Action ExitReloadAnimation)
+    public override void OnReload(Action<float> OnReloadAnimation, Action ExitReloadAnimation)
     {
         reloadCoroutine = StartCoroutine(ReloadCoroutine(OnReloadAnimation, ExitReloadAnimation));
     }
@@ -42,20 +42,22 @@ public class BoltActionWeapon : Weapon
             yield break;
         }
     }
-    IEnumerator ReloadCoroutine(Action OnReloadAnimation, Action ExitReloadAnimation)
+    IEnumerator ReloadCoroutine(Action<float> OnReloadAnimation, Action ExitReloadAnimation)
     {
         //예비탄환이 없거나 탄창이 꽉 차있으면 진행하지 않는다
         if (invenAmmoCount == 0 || magazineAmmoCount >= weaponData.MaxAmmo)
             yield break;
 
         //재장전 애니메이션 재생
-        OnReloadAnimation?.Invoke();
-        magazineObject?.SetActive(false);
-        //재장전 시간동안 대기
+        OnReloadAnimation?.Invoke(weaponData.ReloadTime);
+        if (magazineObject != null)
+            magazineObject.SetActive(false);
+            //재장전 시간동안 대기
         yield return new WaitForSeconds(weaponData.ReloadTime);
 
         ExitReloadAnimation?.Invoke();
-        magazineObject.SetActive(true);
+        if (magazineObject != null)
+            magazineObject.SetActive(true);
         //탄약 충전
         if (invenAmmoCount >= weaponData.MaxAmmo)
         {
