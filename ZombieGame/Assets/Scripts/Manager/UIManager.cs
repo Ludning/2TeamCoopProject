@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
     public Slider hpBar;
     public GameObject pauseUI;
+    public GameObject ClearUI;
     
     // 탄창 업데이트 
     public void UpdateAmmoText(int magAmmo, int remainAmmo)
@@ -100,5 +101,8 @@ public class UIManager : MonoBehaviour
         pauseUI.SetActive(isPause);
         Debug.Log("isPause true?");
     }
-
+    public void SetActiveClearUI(bool isClear)
+    {
+        ClearUI.SetActive(isClear);
+    }
 }
