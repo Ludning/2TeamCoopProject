@@ -34,8 +34,8 @@ public class SpawnManager : MonoBehaviour
                     Debug.Log(monster.GetComponent<MonsterController>());
                     Debug.Log(spawnPoint.transform.position);
                     MonsterInitialize init = monster.GetComponent<MonsterInitialize>();
-                    init.Init();
                     init.SetupPosition(spawnPoint.transform.position);
+                    init.Init();
                     MonsterList.Add(monster.GetComponent<LivingEntity>());
                 }
                 else
