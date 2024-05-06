@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item_Ammo : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         Debug.Log($"OnCollisionEnter! : {collision.gameObject.name}");
         if (collision.transform.CompareTag("Player"))
