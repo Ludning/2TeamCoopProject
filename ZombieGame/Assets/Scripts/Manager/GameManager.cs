@@ -112,19 +112,6 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(GameOverRoutine());
     }
-    void Update()
-    {
-        //Timer.instance.currentTime -= Time.deltaTime;
-        if (Timer.instance.currentTime <= 0)
-        {
-            GameVictroy();
-        }
-    }
-    public void GameStart()
-    {
-        UHD.instance.hp = UHD.instance.maxhp;
-    }
-
     IEnumerator GameOverRoutine()
     {
 
@@ -134,24 +121,10 @@ public class GameManager : MonoBehaviour
         UHD.instance.uiResult.Lose();
         Stop();
     }
-
-    public void GameOver()
-    {
-        StartCoroutine(GameOverRoutine());
-    }
-
     
     public void GameVictroy()
     {
         StartCoroutine(GameVictroyRoutine());
-    }
-    IEnumerator GameOverRoutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        UHD.instance.uiResult.gameObject.SetActive(true);
-        UHD.instance.uiResult.Lose();
-        Stop();
     }
     IEnumerator GameVictroyRoutine()
     {
