@@ -10,6 +10,7 @@ public class Result : MonoBehaviour
     public void Lose()
     {
         titles[0].SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Win()

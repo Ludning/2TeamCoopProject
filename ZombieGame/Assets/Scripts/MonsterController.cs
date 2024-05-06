@@ -60,6 +60,7 @@ public class MonsterController : MonoBehaviour, IInitable
     public void Init()
     {
         isDie = false;
+        playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
         stateMachine.InitState(State.IDLE);
         StartCoroutine(CheckMonsterState());
     }
@@ -76,7 +77,6 @@ public class MonsterController : MonoBehaviour, IInitable
                 stateMachine.ChangeState(State.DIE);
                 yield break;
             }
-
             float distance = Vector3.Distance(playerTr.position, monsterTr.position);
 
             if (distance <= attackDistance)

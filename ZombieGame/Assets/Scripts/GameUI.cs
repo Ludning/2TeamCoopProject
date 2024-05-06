@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour
     public void OnClickNewGame()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
         Debug.Log("게임시작");
     }
 
