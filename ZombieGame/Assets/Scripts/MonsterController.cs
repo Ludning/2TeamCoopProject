@@ -77,14 +77,18 @@ public class MonsterController : MonoBehaviour
             {
                 stateMachine.ChangeState(State.ATTACK);
             }
-            else if (distance <= traceDistance)
+            else
+            {
+                stateMachine.ChangeState(State.TRACE);
+            }
+            /*else if (distance <= traceDistance)
             {
                 stateMachine.ChangeState(State.TRACE);
             }
             else
             {
                 stateMachine.ChangeState(State.IDLE);
-            }
+            }*/
         }
     }
 

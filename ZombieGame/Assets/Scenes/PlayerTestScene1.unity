@@ -867,6 +867,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 931899233, guid: 8f02f869b6fe86e4088930044a36c887, type: 3}
+      propertyPath: MonsterPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 931899233, guid: 8f02f869b6fe86e4088930044a36c887, type: 3}
+      propertyPath: MonsterPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6633895595583902207, guid: eb4410c1f7a66144f932a6f2f1dd4f78, type: 3}
+    - target: {fileID: 931899233, guid: 8f02f869b6fe86e4088930044a36c887, type: 3}
+      propertyPath: MonsterPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 7710666347201454904, guid: 4ba50d5933ca1244985779fd7b1d31f1, type: 3}
+    - target: {fileID: 931899233, guid: 8f02f869b6fe86e4088930044a36c887, type: 3}
+      propertyPath: MonsterPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 6633895595583902207, guid: eb4410c1f7a66144f932a6f2f1dd4f78, type: 3}
     - target: {fileID: 5272736337189938187, guid: 8f02f869b6fe86e4088930044a36c887, type: 3}
       propertyPath: aimScreenPosition
       value: 
