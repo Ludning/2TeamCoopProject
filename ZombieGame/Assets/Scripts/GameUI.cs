@@ -16,6 +16,7 @@ public class GameUI : MonoBehaviour
         SceneManager.LoadScene(1);
         Debug.Log("게임시작");
     }
+
     public void OnClickExit()
     {
 #if UNITY_EDITOR

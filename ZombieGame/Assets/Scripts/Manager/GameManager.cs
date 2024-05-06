@@ -33,6 +33,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [Header("#GAME CONTROL")]
+    public float gameTime; //실제 게임시간
+    public float maxGameTime = 2 * 10f; //최대게임시간
+    public bool isLive;
+    [Header("#PLAYER INFO")]
+    public float hp;
+    public float maxhp = 100;
+    public int kill;
+    public int Score;
+    public int Wave;
+    public int[] nextWave = { 20,20,20,20,20 }; //20초 나중에 수정 가능
+    [Header("#GAME OBJECT")]
+    public Result uiResult;
+
     private bool isPause;
 
     private int wave = 1;
@@ -89,6 +103,10 @@ public class GameManager : MonoBehaviour
             GameVictroy();
         }
     }
+    public void GameStart()
+    {
+        UHD.instance.hp = UHD.instance.maxhp;
+    }
 
     public void GameOver()
     {
@@ -97,7 +115,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverRoutine()
     {
-        //isLive = false; 죽었을때
 
         yield return new WaitForSeconds(0.5f);
 
@@ -113,7 +130,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameVictroyRoutine()
     {
-        //isLive = false;
 
         yield return new WaitForSeconds(0.5f);
 

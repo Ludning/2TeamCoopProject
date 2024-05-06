@@ -9,12 +9,12 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI timertext;
     [SerializeField] public float currentTime;
 
-    void Awake()
+    public void Awake()
     {
         instance = this;
     }
 
-    void Update()
+    public void Update()
     {
         if (currentTime > 0)
         {
@@ -30,4 +30,5 @@ public class Timer : MonoBehaviour
         int sec = Mathf.FloorToInt(currentTime % 60);
         timertext.text = string.Format("{0:00}:{1:00}", min, sec);
     }
+
 }
