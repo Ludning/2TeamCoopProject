@@ -78,5 +78,50 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateHpBar(currentHealth, maxHealth);
 
     }
+    void Update()
+    {
+        //Timer.instance.currentTime -= Time.deltaTime;
+        if (Timer.instance.currentTime <= 0)
+        {
+            GameVictroy();
+        }
+    }
+    public void GameStart()
+    {
+        UHD.instance.hp = UHD.instance.maxhp;
+    }
 
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+    }
+
+    
+
+    public void GameVictroy()
+    {
+        StartCoroutine(GameVictroyRoutine());
+    }
+    IEnumerator GameOverRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        UHD.instance.uiResult.gameObject.SetActive(true);
+        UHD.instance.uiResult.Lose();
+        Stop();
+    }
+    IEnumerator GameVictroyRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        UHD.instance.uiResult.gameObject.SetActive(true);
+        UHD.instance.uiResult.Win();
+        Stop();
+    }
+
+public void Stop()
+    {
+        //isLive = false;
+        Time.timeScale = 0;
+    }
 }
