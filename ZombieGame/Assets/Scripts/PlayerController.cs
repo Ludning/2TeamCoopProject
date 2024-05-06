@@ -9,10 +9,7 @@ public class PlayerController : MonoBehaviour, IMovable
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float runSpeed = 1f;
     [SerializeField] private float gravity = 40f;
-    [SerializeField] private float rotateSpeed = 20f;
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private bool isGrounded = true;
-
 
     float maxDistance = 0.1f;
 
@@ -20,7 +17,10 @@ public class PlayerController : MonoBehaviour, IMovable
     private Vector2 mouseDelta;
     private CharacterController controller;
     private Animator animator;
-    private Transform spine_01;
+    //private Transform spine_01;
+
+    [SerializeField]
+    private Transform rightArm;
 
     public float mouseSensitivity = 10f; // 마우스 민감도
     private float xRotation = 0f; // 수직 회전을 위한 변수
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour, IMovable
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        spine_01 = animator.GetBoneTransform(HumanBodyBones.Spine);
+        //spine_01 = animator.GetBoneTransform(HumanBodyBones.Spine);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -47,7 +47,8 @@ public class PlayerController : MonoBehaviour, IMovable
 
     private void LateUpdate()
     {
-        spine_01.RotateAround(spine_01.transform.position, transform.right, xRotation);
+        //spine_01.RotateAround(spine_01.transform.position, transform.right, xRotation);
+        //rightArm.RotateAround(rightArm.transform.position, transform.right, xRotation);
     }
 
     #region 인풋 시스템 함수
@@ -93,5 +94,4 @@ public class PlayerController : MonoBehaviour, IMovable
         if  (hit.collider != null) { /*Debug.Log(hit.collider.name);*/ return true; }
         else { /*Debug.Log("안부딫힘");*/ return false; }
     }
-
 }

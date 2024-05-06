@@ -12,7 +12,7 @@ public class TestDamage : MonoBehaviour
     {
         playerHealth = player.GetComponent<LivingEntity>();
         damageMessage = new DamageMessage();
-        damageMessage.damage = 20;
+        damageMessage.damage = 50;
 
         StartCoroutine(DamageCoroutine());
     }
