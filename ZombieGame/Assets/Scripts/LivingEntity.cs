@@ -25,6 +25,15 @@ public class LivingEntity : MonoBehaviour, IDamageable
         }
     }
 
+    public bool IsDead
+    {
+        get
+        {
+            if (health <= 0) return true;
+            return false;
+        }
+    }
+
     protected virtual void OnEnable()
     {
         dead = false;

@@ -32,7 +32,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public TextMeshProUGUI ammoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon1AmmoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon2AmmoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon3AmmoText; // TextMeshPro 사용
+    public TextMeshProUGUI weapon4AmmoText; // TextMeshPro 사용
     public TMP_Text scoreText; // TextMeshPro 사용
     public TMP_Text waveText; // TextMeshPro 사용
     public GameObject gameOverUI;
@@ -42,15 +45,39 @@ public class UIManager : MonoBehaviour
     public GameObject pauseUI;
 
 
-    void Update()
-    {
-        hpBar.value = curhp / maxhp;
-    }
+    //void Update()
+    //{
+    //    hpBar.value = curhp / maxhp;
+    //}
+    public GameObject GameReplayUI;
 
-    // 탄창 업데이트 
-    public void UpdateAmmoText(int magAmmo, int remainAmmo)
+    public void ShowReplayUI()
     {
-        //ammoText.text = magAmmo + "/" + remainAmmo;
+        GameReplayUI.SetActive(true);
+    }
+    // 탄창 업데이트 
+    public void UpdateAmmoText(int magAmmo, int remainAmmo, int weaponSlotIndex)
+    {
+        switch(weaponSlotIndex)
+        {
+            case 0:
+                if(weapon1AmmoText != null)
+                    weapon1AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+            case 1:
+                if (weapon2AmmoText != null)
+                    weapon2AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+            case 2:
+                if (weapon3AmmoText != null)
+                    weapon3AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+            case 3:
+                if (weapon4AmmoText != null)
+                    weapon4AmmoText.text = magAmmo + "/" + remainAmmo;
+                break;
+        }
+        
     }
 
     // 점수 업데이트
@@ -60,15 +87,18 @@ public class UIManager : MonoBehaviour
     }
 
     // 웨이브 텍스트 업데이트
-    public void UpdateWaveText(int waves, int count)
+    public void UpdateWaveText(int waves)
     {
-        waveText.text = "Wave : " + waves + "\nEnemy Left : " + count;
+        waveText.text = "Wave : " + waves;
     }
 
     // 체력바 업데이트
     public void UpdateHpBar(float currentHp, float maxHp)
     {
-        hpBar.value = currentHp / maxHp;
+        if (hpBar != null)
+            hpBar.value = currentHp / maxHp;
+        else
+            Debug.Log("hpBar를 넣지 않았소다!");
     }
 
     // 게임오버UI 액티브

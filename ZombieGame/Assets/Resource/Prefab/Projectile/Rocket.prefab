@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3898657088375906348}
   - component: {fileID: 6664705080470649232}
-  - component: {fileID: -928043285232789055}
+  - component: {fileID: 2577470298064996544}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -50,7 +50,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-928043285232789055
+--- !u!114 &2577470298064996544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,10 +59,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3898657088375906351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8044fd30f7e1a140afbb478977ad3a9, type: 3}
+  m_Script: {fileID: 11500000, guid: c34f65b2125ecdb4d8d5d78d8da791d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6664705080470649232}
+  trailRenderer: {fileID: 0}
+  hitEnvirPaticle: {fileID: 0}
+  hitEnemyPaticle: {fileID: 0}
+  hitPaticle: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
 --- !u!1001 &8439718290105701707
 PrefabInstance:
   m_ObjectHideFlags: 0

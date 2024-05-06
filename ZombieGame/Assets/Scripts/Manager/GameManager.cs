@@ -9,7 +9,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 public class GameManager : MonoBehaviour
 {//score , pause , cashing , spawn(objectpool)
 
-    public static GameManager instance;
+    private static GameManager instance;
 
     public static GameManager Instance
     {
@@ -35,23 +35,30 @@ public class GameManager : MonoBehaviour
 
     private bool isPause;
 
+    private int wave = 1;
+
     //게임 score
     private int score = 0;
     //게임오버 체크
     public bool isGameOver { get; private set; }
 
 
-    public void UpdateAmmo(int magAmmo, int remainAmmo)
+    public void UpdateAmmo(int magAmmo, int remainAmmo, int weaponSlotIndex)
     {
-        UIManager.Instance.UpdateAmmoText(magAmmo, remainAmmo);
+        UIManager.Instance.UpdateAmmoText(magAmmo, remainAmmo, weaponSlotIndex);
     }
 
     //점수 추가
-
     public void AddScore(int newScore)
     {
         score += newScore;
         UIManager.Instance.UpdateScoreText(score);
+    }
+    //웨이브 변경
+    public void AddWave()
+    {
+        wave++;
+        UIManager.Instance.UpdateWaveText(wave);
     }
     //게임오버
     public void EndGame()

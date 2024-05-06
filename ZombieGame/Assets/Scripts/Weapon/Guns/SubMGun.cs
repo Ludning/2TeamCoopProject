@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class SubMGun : AutomaticWeapon
 {
-
+    public override void AddAmmo()
+    {
+        invenAmmoCount += 60;
+    }
 }

@@ -13,7 +13,7 @@ public class PlayerHealth : LivingEntity
 
     private void UpdateHpUI()
     {
-
+        UIManager.Instance.UpdateHpBar(health, maxHealth);
     }
 
     protected override void OnEnable()
@@ -33,6 +33,7 @@ public class PlayerHealth : LivingEntity
     {
         if(!base.ApplyDamage(damageMessage)) return false;
         Debug.Log(damageMessage.damage + "의 데미지 받음");
+        animator.SetTrigger("IsDamaged");
         UpdateHpUI();
         return true;
     }
@@ -43,6 +44,6 @@ public class PlayerHealth : LivingEntity
         Debug.Log("플레이어 죽음");
         UpdateHpUI();
 
-        //animator.SetTrigger("Die");
+        animator.SetTrigger("IsDead");
     }
 }

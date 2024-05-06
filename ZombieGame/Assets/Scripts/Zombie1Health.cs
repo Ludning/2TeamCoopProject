@@ -11,9 +11,13 @@ public class Zombie1Health : LivingEntity
         animator = GetComponent<Animator>();
     }
 
+    public void Setup(float maxHealth)
+    {
+        this.maxHealth = maxHealth;
+    }
+
     protected override void OnEnable()
     {
-        //maxHealth = 100f;
         minTimeBetDamaged = 0;
         base.OnEnable();
     }
@@ -21,16 +25,21 @@ public class Zombie1Health : LivingEntity
     public override bool ApplyDamage(DamageMessage damageMessage)
     {
         if (!base.ApplyDamage(damageMessage)) return false;
-
+        Debug.Log("좀비 " + damageMessage.damage + " 피해입음");
         return true;
     }
 
     public override void Die()
     {
         base.Die();
-
+        Debug.Log("좀비 죽음");
         animator.SetTrigger("Die");
 
-        gameObject.SetActive(false);
+    }
+
+    public void Disappear()
+    {
+        //gameObject.SetActive(false);
+        PoolManager.Instance.ReturnToPool(gameObject);
     }
 }
