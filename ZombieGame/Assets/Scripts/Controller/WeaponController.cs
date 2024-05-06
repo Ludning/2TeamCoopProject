@@ -9,13 +9,14 @@ using UnityEngine.InputSystem;
 public class WeaponController : MonoBehaviour
 {
     private Animator animator;
+    private LivingEntity playerHealth;
 
-    //¹«±â °ÅÄ¡´ë
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½
     [SerializeField]
     Transform weaponHanger;
 
     List<GameObject> weaponList = new List<GameObject>();
-    //ÇöÀç ¹«±â
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     IWeapon currentWeapon;
 
     Coroutine weaponFireCoroutine;
@@ -30,7 +31,7 @@ public class WeaponController : MonoBehaviour
 
     List<GameObject> reloadList = new List<GameObject>();
 
-    //»ç°Ý Á¶ÁØ IK
+    //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ IK
     [SerializeField]
     TwoBoneIKConstraint LeftIKConstraint;
     [SerializeField]
@@ -40,7 +41,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     MultiAimConstraint HangerAimConstraint;
 
-    //ÀçÀåÀü¿ë IK
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IK
     [SerializeField]
     MultiParentConstraint reloadHandConstrain;
     MultiParentConstraint magazineConstrain;
@@ -103,22 +104,25 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        playerHealth = GetComponent<LivingEntity>();
         AimScreenPosition = AimScreenCenterPosition;
     }
     private void Update()
     {
+        if(playerHealth.IsDead) aimRig.weight = 0;//ï¿½Ó½Ã·ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
         leftHandTarget.position = currentWeapon.GetLeftHandGrip().position;
         leftHandTarget.rotation = currentWeapon.GetLeftHandGrip().rotation;
         rightHandTarget.position = currentWeapon.GetRightHandGrip().position;
         rightHandTarget.rotation = currentWeapon.GetRightHandGrip().rotation;
 
-        //¹Ýµ¿ È¸º¹ ÄÚµå
-        if(Vector2.Distance(AimScreenPosition, AimScreenCenterPosition) > 0.05f)
+        //ï¿½Ýµï¿½ È¸ï¿½ï¿½ ï¿½Úµï¿½
+        if (Vector2.Distance(AimScreenPosition, AimScreenCenterPosition) > 0.05f)
             AimScreenPosition = Vector2.Lerp(AimScreenPosition, AimScreenCenterPosition, currentWeapon.GetRecoverySpeed() * Time.deltaTime);
     }
     private void FixedUpdate()
     {
-        RaycastHit hit; // Ãæµ¹ Á¤º¸¸¦ ÀúÀåÇÒ º¯¼ö
+        RaycastHit hit; // ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(AimScreenPosition.x, AimScreenPosition.y));
 
         if (Physics.Raycast(ray, out hit))
@@ -134,18 +138,18 @@ public class WeaponController : MonoBehaviour
 
     public void AimReaction(float recoilAmount)
     {
-        // Ä«¸Þ¶óÀÇ Áß½É¿¡¼­ ·¹ÀÌÄ³½ºÆ®¸¦ ¹ß»ç
+        // Ä«ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½ß½É¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß»ï¿½
 
         AimScreenPosition = new Vector2(AimScreenPosition.x + UnityEngine.Random.Range(-recoilAmount, recoilAmount), AimScreenPosition.y + UnityEngine.Random.Range(0, recoilAmount));
     }
 
-    #region ÀÔ·Â½Ã½ºÅÛ¿¡¼­ »ç¿ëÇÏ´Â ÇÔ¼ö
-    //½Ã¾ß
+    #region ï¿½Ô·Â½Ã½ï¿½ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+    //ï¿½Ã¾ï¿½
     public void OnLook(InputAction.CallbackContext context)
     {
 
     }
-    //¹ß»ç
+    //ï¿½ß»ï¿½
     public void OnFire(InputAction.CallbackContext context)
     {
         if (isReload == true)
@@ -164,7 +168,7 @@ public class WeaponController : MonoBehaviour
             currentWeapon.OnFireEnd();
         }
     }
-    //Á¶ÁØ
+    //ï¿½ï¿½ï¿½ï¿½
     public void OnAim(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -180,7 +184,7 @@ public class WeaponController : MonoBehaviour
 
         }
     }
-    //ÀçÀåÀü
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void OnReload(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -196,7 +200,7 @@ public class WeaponController : MonoBehaviour
 
         }
     }
-    //¹«±â º¯°æ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
         if(isReload == true)
@@ -215,7 +219,7 @@ public class WeaponController : MonoBehaviour
         }
     }
     #endregion
-    //¹«±â È°¼ºÈ­
+    //ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
     public void ActiveWeapon(int index)
     {
         weaponList.ForEach(weapon => { weaponList[index].GetComponent<IWeapon>().StopMuzzleFlash(); weapon.SetActive(false); });
@@ -235,9 +239,9 @@ public class WeaponController : MonoBehaviour
 
         prevAnimationSpeed = animator.speed;
         Debug.Log($"reloadClip.length : {reloadClip.length}, {reloadClip.length / reloadTime}");
-        //ÀçÀåÀü ¾Ö´Ï¸ÅÀÌ¼Ç Àç»ý ¼Óµµ °è»ê
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½
         float animationSpeed = reloadClip.length / reloadTime;
-        // ¾Ö´Ï¸ÞÀÌ¼ÇÀÇ Àç»ý ¼Óµµ ¼³Á¤
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
         animator.speed = animationSpeed;
 
         currentWeapon.GetReloadMagazineTransform().gameObject.SetActive(true);

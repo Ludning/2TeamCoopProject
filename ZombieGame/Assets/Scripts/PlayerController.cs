@@ -9,9 +9,7 @@ public class PlayerController : MonoBehaviour, IMovable
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float runSpeed = 1f;
     [SerializeField] private float gravity = 40f;
-    [SerializeField] private float rotateSpeed = 20f;
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private bool isGrounded = true;
 
     float maxDistance = 0.1f;
 
@@ -102,5 +100,4 @@ public class PlayerController : MonoBehaviour, IMovable
         if  (hit.collider != null) { /*Debug.Log(hit.collider.name);*/ return true; }
         else { /*Debug.Log("¾ÈºÎ‹HÈû");*/ return false; }
     }
-
 }

@@ -12,9 +12,10 @@ public class MonsterController : MonoBehaviour
 
     public State state = State.IDLE;
 
-    public float traceDistance = 10.0f;
+    public float traceDistance = 100.0f;
     public float attackDistance = 2.0f;
-
+    public float attackDamage = 20f;
+    public float traceSpeed = 3.5f;
 
     public bool isDie = false;
 
@@ -23,6 +24,7 @@ public class MonsterController : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     private StateMachine stateMachine;
+    private LivingEntity zombieHealth;
 
     private readonly int hashTrace = Animator.StringToHash("IsTrace");
     private readonly int hashAttack = Animator.StringToHash("IsAttack");
@@ -32,13 +34,24 @@ public class MonsterController : MonoBehaviour
         monsterTr = GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        zombieHealth = GetComponent<LivingEntity>();
         playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
         stateMachine = gameObject.AddComponent<StateMachine>();
         stateMachine.AddState(State.IDLE, new IdleState(this));
         stateMachine.AddState(State.TRACE, new TraceState(this));
         stateMachine.AddState(State.ATTACK, new AttackState(this));
+        stateMachine.AddState(State.DIE, new DieState(this));
         stateMachine.InitState(State.IDLE);
     }
+
+    public void Setup(float traceDistance, float traceSpeed, float attackDistance, float attackDamage)
+    {
+        this.traceDistance = traceDistance;
+        agent.speed = traceSpeed;
+        this.attackDistance = attackDistance;
+        this.attackDamage = attackDamage;
+    }
+
 
     private void Start()
     {
@@ -52,8 +65,9 @@ public class MonsterController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.3f);
 
-            if (state == State.DIE)
+            if (zombieHealth.IsDead)
             {
+                isDie = true;
                 stateMachine.ChangeState(State.DIE);
                 yield break;
             }
@@ -73,6 +87,15 @@ public class MonsterController : MonoBehaviour
                 stateMachine.ChangeState(State.IDLE);
             }
         }
+    }
+
+    //애니메이션 이벤트로 실행되는 메서드
+    public void ApplyDamageToPlayer()
+    {
+        if (Vector3.Distance(playerTr.position, monsterTr.position) > attackDistance) return;
+        DamageMessage damageMessage = new DamageMessage();
+        damageMessage.damage = attackDamage;
+        playerTr.GetComponent<LivingEntity>().ApplyDamage(damageMessage);
     }
 
     private class BaseMonsterState : BaseState
@@ -111,6 +134,16 @@ public class MonsterController : MonoBehaviour
         {
             owner.anim.SetBool(owner.hashTrace, false);
             owner.anim.SetBool(owner.hashAttack, true);
+        }
+    }
+
+    private class DieState : BaseMonsterState
+    {
+        public DieState(MonsterController owner) : base(owner) { }
+        public override void Enter()
+        {
+            owner.agent.isStopped = true;
+            owner.agent.velocity = Vector3.zero;
         }
     }
 }
