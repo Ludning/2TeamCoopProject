@@ -115,6 +115,7 @@ public class Weapon : MonoBehaviour, IWeapon
     }
     public void OnFire()
     {
+        PlayMuzzleFlash();
         GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
         projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
         magazineAmmoCount--;
