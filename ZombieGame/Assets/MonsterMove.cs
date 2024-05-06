@@ -5,11 +5,8 @@ using UnityEngine.AI;
 
 public class MonsterMove : MonoBehaviour
 {
+    [SerializeField]
     NavMeshAgent agent;
-    private void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
     public void SetupPosition(Vector3 position)
     {
         agent.enabled = false;

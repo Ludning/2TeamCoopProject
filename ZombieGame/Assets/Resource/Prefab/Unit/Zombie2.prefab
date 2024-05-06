@@ -2671,10 +2671,10 @@ GameObject:
   - component: {fileID: 6726851619970257195}
   - component: {fileID: 3733642600599665745}
   - component: {fileID: 6150894239265101788}
+  - component: {fileID: 7366841260175617338}
   - component: {fileID: 6150894239265101762}
   - component: {fileID: 4705181416031905505}
   - component: {fileID: -2502613479065705169}
-  - component: {fileID: 7366841260175617338}
   m_Layer: 0
   m_Name: Zombie2
   m_TagString: Monster
@@ -2755,6 +2755,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7366841260175617338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710666347201454904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de22da5715aaae44a924c3077c7e562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 6150894239265101788}
 --- !u!114 &6150894239265101762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2802,18 +2815,6 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &7366841260175617338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7710666347201454904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0de22da5715aaae44a924c3077c7e562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7797036639139194138
 GameObject:
   m_ObjectHideFlags: 0
