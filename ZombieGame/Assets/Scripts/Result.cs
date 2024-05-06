@@ -15,6 +15,7 @@ public class Result : MonoBehaviour
     public void Win()
     {
         titles[1].SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 
 }

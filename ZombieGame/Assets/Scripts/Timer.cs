@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
         }
-        else if( currentTime < 0)
+        else if (currentTime < 0)
         {
             currentTime = 0;
             //다음웨이브 호출 함수
@@ -30,5 +30,4 @@ public class Timer : MonoBehaviour
         int sec = Mathf.FloorToInt(currentTime % 60);
         timertext.text = string.Format("{0:00}:{1:00}", min, sec);
     }
-
 }

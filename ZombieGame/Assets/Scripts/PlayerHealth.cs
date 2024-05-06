@@ -45,5 +45,6 @@ public class PlayerHealth : LivingEntity
         UpdateHpUI();
 
         animator.SetTrigger("IsDead");
+        GameManager.Instance.GameOver();
     }
 }
