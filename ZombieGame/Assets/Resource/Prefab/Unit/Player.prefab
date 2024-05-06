@@ -188,6 +188,8 @@ MonoBehaviour:
   MonsterList: []
   MonsterPrefabs:
   - {fileID: 6633895595583902207, guid: eb4410c1f7a66144f932a6f2f1dd4f78, type: 3}
+  - {fileID: 6633895595583902207, guid: eb4410c1f7a66144f932a6f2f1dd4f78, type: 3}
+  - {fileID: 6633895595583902207, guid: eb4410c1f7a66144f932a6f2f1dd4f78, type: 3}
   - {fileID: 7710666347201454904, guid: 4ba50d5933ca1244985779fd7b1d31f1, type: 3}
 --- !u!1 &1414859034
 GameObject:
