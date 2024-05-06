@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 public class GameManager : MonoBehaviour
 {//score , pause , cashing , spawn(objectpool)
 
@@ -69,7 +71,53 @@ public class GameManager : MonoBehaviour
     public void UpdateHealth(float currentHealth, float maxHealth)
     {
         UIManager.Instance.UpdateHpBar(currentHealth, maxHealth);
-
     }
 
+    //..테스트용
+
+    void Update()
+    {
+        if (Timer.instance.currentTime <= 0)
+        {
+            GameVictroy();
+        }
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+        //isLive = false; 죽었을때
+
+        yield return new WaitForSeconds(0.5f);
+
+        UHD.instance.uiResult.gameObject.SetActive(true);
+        UHD.instance.uiResult.Lose();
+        Stop();
+    }
+
+    public void GameVictroy()
+    {
+        StartCoroutine(GameVictroyRoutine());
+    }
+
+    IEnumerator GameVictroyRoutine()
+    {
+        //isLive = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        UHD.instance.uiResult.gameObject.SetActive(true);
+        UHD.instance.uiResult.Win();
+        Stop();
+    }
+
+    public void Stop()
+    {
+        //isLive = false;
+        Time.timeScale = 0;
+    }
 }

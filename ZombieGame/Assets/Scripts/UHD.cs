@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 
 public class UHD : MonoBehaviour
 {
+    public static UHD instance;
+
     [Header("#GAME CONTROL")]
-    public float gameTime; //실제 게임시간
-    public float maxGameTime = 2 * 10f; //최대게임시간
+    //public float gameTime; //실제 게임시간
+    //public float maxGameTime = 2 * 10f; //최대게임시간
     public bool isLive;
     [Header("#PLAYER INFO")]
     public float hp;
     public float maxhp = 100;
     public int Wavelevel;
     public int kill;
+    [Header("#GAME OBJECT")]
+    public Result uiResult;
+
 
     public enum InfoType { WaveLevel, Inventory, Time, Hp, Kill }
     public InfoType type;
@@ -26,6 +32,7 @@ public class UHD : MonoBehaviour
     {
         myText = GetComponent<Text>();
         mySlider = GetComponent<Slider>();
+        instance = this;
     }
 
     void LateUpdate()

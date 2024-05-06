@@ -5,8 +5,14 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance;
     [SerializeField] TextMeshProUGUI timertext;
-    [SerializeField] float currentTime;
+    [SerializeField] public float currentTime;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Update()
     {
