@@ -123,7 +123,7 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         PlayMuzzleFlash();
         GameObject projectile = PoolManager.Instance.GetGameObject(weaponData.projectile);
-        projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.velocity);
+        projectile.GetComponent<Projectile>().Shot(firePosition, weaponData.Damage, weaponData.velocity);
         magazineAmmoCount--;
         UIManager.Instance.UpdateAmmoText(magazineAmmoCount, invenAmmoCount, weaponSlotIndex);
     }

@@ -67,6 +67,7 @@ public class WeaponController : MonoBehaviour
     Transform leftHandReloadTransform;
 
     bool isReload = false;
+    bool isFire = false;
 
     Vector2 AimScreenCenterPosition
     {
@@ -156,6 +157,7 @@ public class WeaponController : MonoBehaviour
             return;
         if(context.started)
         {
+            isFire = true;
             animator.SetTrigger("IsFire");
             currentWeapon.OnFireStart(AimReaction);
         }
@@ -166,6 +168,7 @@ public class WeaponController : MonoBehaviour
         else if (context.canceled)
         {
             currentWeapon.OnFireEnd();
+            isFire = false;
         }
     }
     //����
@@ -232,6 +235,8 @@ public class WeaponController : MonoBehaviour
     }
     public void StartReloadAnimation(float reloadTime)
     {
+        if(isFire == true)
+            return;
         isReload = true;
         animator.SetTrigger("IsReload");
 
