@@ -51,6 +51,12 @@ public class MonsterController : MonoBehaviour
         this.attackDistance = attackDistance;
         this.attackDamage = attackDamage;
     }
+    public void SetupPosition(Vector3 position)
+    {
+        agent.enabled = false;
+        transform.position = position;
+        agent.enabled = true;
+    }
 
 
     private void Start()
