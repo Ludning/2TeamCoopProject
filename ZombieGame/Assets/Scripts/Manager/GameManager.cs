@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
     }
 
     [Header("#GAME CONTROL")]
-    public float gameTime; //½ÇÁ¦ °ÔÀÓ½Ã°£
-    public float maxGameTime = 2 * 10f; //ÃÖ´ë°ÔÀÓ½Ã°£
+    public float gameTime; //ì‹¤ì œ ê²Œì„ì‹œê°„
+    public float maxGameTime = 2 * 10f; //ìµœëŒ€ê²Œì„ì‹œê°„
     public bool isLive;
     [Header("#PLAYER INFO")]
     public float hp;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public int kill;
     public int Score;
     public int Wave;
-    public int[] nextWave = { 20,20,20,20,20 }; //20ÃÊ ³ªÁß¿¡ ¼öÁ¤ °¡´É
+    public int[] nextWave = { 20,20,20,20,20 }; //20ì´ˆ ë‚˜ì¤‘ì— ìˆ˜ì • ê°€ëŠ¥
     [Header("#GAME OBJECT")]
     public Result uiResult;
 
@@ -51,9 +51,9 @@ public class GameManager : MonoBehaviour
 
     private int wave = 1;
 
-    //°ÔÀÓ score
+    //ê²Œì„ score
     private int score = 0;
-    //°ÔÀÓ¿À¹ö Ã¼Å©
+    //ê²Œì„ì˜¤ë²„ ì²´í¬
     public bool isGameOver { get; private set; }
 
 
@@ -62,19 +62,19 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateAmmoText(magAmmo, remainAmmo, weaponSlotIndex);
     }
 
-    //Á¡¼ö Ãß°¡
+    //ì ìˆ˜ ì¶”ê°€
     public void AddScore(int newScore)
     {
         score += newScore;
         UIManager.Instance.UpdateScoreText(score);
     }
-    //¿şÀÌºê º¯°æ
+    //ì›¨ì´ë¸Œ ë³€ê²½
     public void AddWave()
     {
         wave++;
         UIManager.Instance.UpdateWaveText(wave);
     }
-    //°ÔÀÓ¿À¹ö
+    //ê²Œì„ì˜¤ë²„
     public void EndGame()
     {
         isGameOver = true;
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateHpBar(currentHealth, maxHealth);
     }
 
-    //..Å×½ºÆ®¿ë
+    //..í…ŒìŠ¤íŠ¸ìš©
 
     void Update()
     {
@@ -112,6 +112,18 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(GameOverRoutine());
     }
+    void Update()
+    {
+        //Timer.instance.currentTime -= Time.deltaTime;
+        if (Timer.instance.currentTime <= 0)
+        {
+            GameVictroy();
+        }
+    }
+    public void GameStart()
+    {
+        UHD.instance.hp = UHD.instance.maxhp;
+    }
 
     IEnumerator GameOverRoutine()
     {
@@ -123,22 +135,33 @@ public class GameManager : MonoBehaviour
         Stop();
     }
 
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+    }
+
+    
     public void GameVictroy()
     {
         StartCoroutine(GameVictroyRoutine());
     }
+    IEnumerator GameOverRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
 
+        UHD.instance.uiResult.gameObject.SetActive(true);
+        UHD.instance.uiResult.Lose();
+        Stop();
+    }
     IEnumerator GameVictroyRoutine()
     {
-
         yield return new WaitForSeconds(0.5f);
 
         UHD.instance.uiResult.gameObject.SetActive(true);
         UHD.instance.uiResult.Win();
         Stop();
     }
-
-    public void Stop()
+public void Stop()
     {
         //isLive = false;
         Time.timeScale = 0;
