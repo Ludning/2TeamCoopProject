@@ -59,6 +59,14 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private RectTransform aimScreenPosition;
 
+    [SerializeField]
+    AnimationClip reloadClip;
+
+    [SerializeField]
+    Transform leftHandReloadTransform;
+
+    bool isReload = false;
+
     Vector2 AimScreenCenterPosition
     {
         get
@@ -70,17 +78,16 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-
         weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("AssaultRifle").WaitForCompletion()));
-        weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("CrossBow").WaitForCompletion()));
-        weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("FlameThrower").WaitForCompletion()));
-        weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("HuntingRifle").WaitForCompletion()));
-        weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("MachineGun").WaitForCompletion()));
         weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("Minigun").WaitForCompletion()));
         weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("RocketLauncher").WaitForCompletion()));
-        weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("Shotgun").WaitForCompletion()));
-        weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("SniperRifle").WaitForCompletion()));
         weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("SubMGun").WaitForCompletion()));
+        //weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("CrossBow").WaitForCompletion()));
+        //weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("FlameThrower").WaitForCompletion()));
+        //weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("HuntingRifle").WaitForCompletion()));
+        //weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("MachineGun").WaitForCompletion()));
+        //weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("Shotgun").WaitForCompletion()));
+        //weaponList.Add(Instantiate(Addressables.LoadAssetAsync<GameObject>("SniperRifle").WaitForCompletion()));
 
         weaponList.ForEach(weapon =>
         {
@@ -141,6 +148,8 @@ public class WeaponController : MonoBehaviour
     //발사
     public void OnFire(InputAction.CallbackContext context)
     {
+        if (isReload == true)
+            return;
         if(context.started)
         {
             animator.SetTrigger("IsFire");
@@ -190,13 +199,15 @@ public class WeaponController : MonoBehaviour
     //무기 변경
     public void OnChangeWeapon(InputAction.CallbackContext context)
     {
+        if(isReload == true)
+            return;
         animator.SetTrigger("IsChangeWeapon");
 
         string controlPath = context.control.path;
         Debug.Log(controlPath);
         for (int i = 0; i < weaponList.Count; i++)
         {
-            if (controlPath.Contains(i.ToString()))
+            if (controlPath.Contains((i + 1).ToString()))
             {
                 ActiveWeapon(i);
                 break;
@@ -211,20 +222,25 @@ public class WeaponController : MonoBehaviour
         weaponList[index].SetActive(true);
         currentWeapon = weaponList[index].GetComponent<IWeapon>();
         currentWeapon.StopMuzzleFlash();
+        currentWeapon.GetReloadMagazineTransform().SetParent(leftHandReloadTransform);
+        currentWeapon.GetReloadMagazineTransform().localPosition = Vector3.zero;
+        currentWeapon.GetReloadMagazineTransform().gameObject.SetActive(false);
     }
     public void StartReloadAnimation(float reloadTime)
     {
+        isReload = true;
         animator.SetTrigger("IsReload");
 
         aimRig.weight = 0;
-        //reloadRig.weight = 1;
-        //LeftHand
 
         prevAnimationSpeed = animator.speed;
+        Debug.Log($"reloadClip.length : {reloadClip.length}, {reloadClip.length / reloadTime}");
         //재장전 애니매이션 재생 속도 계산
-        float animationSpeed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / reloadTime;
+        float animationSpeed = reloadClip.length / reloadTime;
         // 애니메이션의 재생 속도 설정
         animator.speed = animationSpeed;
+
+        currentWeapon.GetReloadMagazineTransform().gameObject.SetActive(true);
 
         currentWeapon.GetGameObject().transform.SetParent(RightHand);// + currentWeapon.GetRightHandGrip().localPosition;
         currentWeapon.GetGameObject().transform.localPosition -= currentWeapon.GetRightHandGrip().localPosition;
@@ -234,14 +250,21 @@ public class WeaponController : MonoBehaviour
         animator.speed = prevAnimationSpeed;
 
         aimRig.weight = 1;
-        //reloadRig.weight = 0;
+
+        currentWeapon.GetReloadMagazineTransform().gameObject.SetActive(false);
+
         currentWeapon.GetGameObject().transform.SetParent(weaponHanger);
         currentWeapon.GetGameObject().transform.localPosition = Vector3.zero;
         currentWeapon.GetGameObject().transform.localRotation = Quaternion.identity;
+        isReload = false;
     }
     public void InitWeapon(GameObject prefab)
     {
         weaponList.Add(Instantiate(prefab));
         reloadList.Add(Instantiate(prefab));
+    }
+    public void AddAmmo()
+    {
+        weaponList.ForEach(weapon => { weapon.GetComponent<Weapon>().AddAmmo(); });
     }
 }

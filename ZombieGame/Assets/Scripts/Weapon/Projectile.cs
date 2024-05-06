@@ -12,11 +12,18 @@ public class Projectile : MonoBehaviour, IPoolable
     Vector3 direction;
     [SerializeField]
     Rigidbody rb;
+    [SerializeField]
+    TrailRenderer trailRenderer;
 
     Vector3 prevPosition;
 
+    [SerializeField]
+    GameObject hitEnvirPaticle;
+    [SerializeField]
+    GameObject hitEnemyPaticle;
+
     // Update is called once per frame
-    public virtual void FixedUpdate()
+    public virtual void Update()
     {
         RaycastHit hit;
         Vector3 normalize = (transform.position - prevPosition).normalized;
@@ -28,11 +35,29 @@ public class Projectile : MonoBehaviour, IPoolable
         {
             // 충돌 처리 로직
             Debug.Log("Hit " + hit.collider.gameObject.name);
-            //if (hit.transform.CompareTag("Monster"))
-            //    hit.transform.GetComponent<Idamageable>().OnDamage();
+            HitObject(hit);
             DestroyObject();
         }
         prevPosition = transform.position;
+    }
+    protected virtual void HitObject(RaycastHit hit)
+    {
+        GameObject hitPaticle;
+        if (hit.transform.CompareTag("Monster"))
+        {
+            hitPaticle = PoolManager.Instance.GetGameObject(hitEnemyPaticle);
+            //hit.transform.GetComponent<IDamageable>().OnDamage();
+        }
+        else
+        {
+            hitPaticle = PoolManager.Instance.GetGameObject(hitEnvirPaticle);
+        }
+        
+        Vector3 hitNormal = hit.normal;
+        Debug.Log(hitNormal);
+
+        hitPaticle.transform.position = hit.point + hitNormal * 0.01f;
+        hitPaticle.transform.rotation = Quaternion.LookRotation(hitNormal);
     }
 
     public void Shot(Transform firePosition, float speed)
@@ -41,11 +66,14 @@ public class Projectile : MonoBehaviour, IPoolable
         rb.isKinematic = false;
         this.transform.position = firePosition.position;
         this.transform.rotation = firePosition.rotation;
-        direction = firePosition.forward;// firePosition.localRotation * firePosition.forward;//firePosition.localRotation * Vector3.forward; ;//firePosition.forward * firePosition.localRotation;
+        direction = firePosition.forward;
         this.speed = speed;
 
         //이전 위치 기록
         prevPosition = this.transform.position;
+
+        if (trailRenderer != null)
+            trailRenderer.enabled = true;
 
         rb.AddForce(direction * speed, ForceMode.Impulse);
         Invoke("DestroyObject", 5.0f);
@@ -57,6 +85,9 @@ public class Projectile : MonoBehaviour, IPoolable
         rb.angularVelocity = Vector3.zero;
         rb.ResetInertiaTensor();
         rb.ResetCenterOfMass();
+
+        if(trailRenderer != null)
+            trailRenderer.enabled = false;
 
         PoolManager.Instance.ReturnToPool(gameObject);
     }

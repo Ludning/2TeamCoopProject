@@ -85,9 +85,9 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         return weaponData.RecoverySpeed;
     }
-    public virtual Transform GetMagazineTransform()
+    public virtual Transform GetReloadMagazineTransform()
     {
-        return magazineTransform;
+        return reloadMagazineObject.transform;
     }
     public virtual GameObject GetGameObject()
     {
@@ -127,5 +127,9 @@ public class Weapon : MonoBehaviour, IWeapon
     }
     public virtual void OnReload(Action<float> OnReloadAnimation, Action ExitReloadAnimation)
     {
+    }
+    public virtual void AddAmmo()
+    {
+        invenAmmoCount += 30;
     }
 }

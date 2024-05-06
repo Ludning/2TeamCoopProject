@@ -9,7 +9,7 @@ public interface IWeapon
     public WeaponData WeaponData { get; }
     public void PlayMuzzleFlash();
     public void StopMuzzleFlash();
-    public Transform GetMagazineTransform();
+    public Transform GetReloadMagazineTransform();
     public GameObject GetGameObject();
     public Transform GetWeaponTransform();
     public Transform GetRightHandGrip();
@@ -27,4 +27,5 @@ public interface IWeapon
     public void OnFireStart(Action<float> aimReaction);
     //발사 클릭 종료
     public void OnFireEnd();
+    public void AddAmmo();
 }
