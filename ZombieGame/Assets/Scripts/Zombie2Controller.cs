@@ -116,7 +116,7 @@ public class Zombie2Controller : MonoBehaviour
         stone = Instantiate(stonePrefab, stonePoint);
         stone.transform.localPosition = Vector3.zero;
         Debug.Log(monsterTr.position);
-        monsterTr.LookAt(playerTr.position);//안돌아보네?
+        monsterTr.GetChild(0).LookAt(playerTr.position);//안돌아보네?
     }
 
     public void ThrowRockToPlayer()
