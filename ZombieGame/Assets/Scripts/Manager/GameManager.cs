@@ -33,6 +33,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [Header("#GAME CONTROL")]
+    public float gameTime; //실제 게임시간
+    public float maxGameTime = 2 * 10f; //최대게임시간
+    public bool isLive;
+    [Header("#PLAYER INFO")]
+    public float hp;
+    public float maxhp = 100;
+    public int kill;
+    public int Score;
+    public int Wave;
+    public int[] nextWave = { 20,20,20,20,20 }; //20초 나중에 수정 가능
+    [Header("#GAME OBJECT")]
+    public Result uiResult;
+
     private bool isPause;
 
     //게임 score
@@ -72,6 +86,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateHpBar(currentHealth, maxHealth);
     }
 
+<<<<<<< Updated upstream
     //..테스트용
 
     void Update()
@@ -81,6 +96,11 @@ public class GameManager : MonoBehaviour
         {
             GameVictroy();
         }
+=======
+    public void GameStart()
+    {
+        UHD.instance.hp = UHD.instance.maxhp;
+>>>>>>> Stashed changes
     }
 
     public void GameOver()
@@ -90,8 +110,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverRoutine()
     {
+<<<<<<< Updated upstream
         //isLive = false; 죽었을때
 
+=======
+>>>>>>> Stashed changes
         yield return new WaitForSeconds(0.5f);
 
         UHD.instance.uiResult.gameObject.SetActive(true);
@@ -106,8 +129,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameVictroyRoutine()
     {
+<<<<<<< Updated upstream
         //isLive = false;
 
+=======
+>>>>>>> Stashed changes
         yield return new WaitForSeconds(0.5f);
 
         UHD.instance.uiResult.gameObject.SetActive(true);
@@ -115,9 +141,18 @@ public class GameManager : MonoBehaviour
         Stop();
     }
 
+<<<<<<< Updated upstream
     public void Stop()
     {
         //isLive = false;
         Time.timeScale = 0;
     }
+=======
+
+    public void Stop()
+    {
+        Time.timeScale = 0;
+    }
+
+>>>>>>> Stashed changes
 }
