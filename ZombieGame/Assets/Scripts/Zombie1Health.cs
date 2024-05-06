@@ -34,7 +34,7 @@ public class Zombie1Health : LivingEntity
         base.Die();
         Debug.Log("Á»ºñ Á×À½");
         animator.SetTrigger("Die");
-
+        GameManager.Instance.AddScore(10);
     }
 
     public void Disappear()
