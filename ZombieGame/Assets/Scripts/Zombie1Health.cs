@@ -22,7 +22,6 @@ public class Zombie1Health : LivingEntity
         base.OnEnable();
     }
 
-
     public override bool ApplyDamage(DamageMessage damageMessage)
     {
         if (!base.ApplyDamage(damageMessage)) return false;

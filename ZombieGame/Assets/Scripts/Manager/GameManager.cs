@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 public class GameManager : MonoBehaviour
 {//score , pause , cashing , spawn(objectpool)
 
@@ -31,13 +33,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [Header("#GAME CONTROL")]
+    public float gameTime; //ì‹¤ì œ ê²Œì„ì‹œê°„
+    public float maxGameTime = 2 * 10f; //ìµœëŒ€ê²Œì„ì‹œê°„
+    public bool isLive;
+    [Header("#PLAYER INFO")]
+    public float hp;
+    public float maxhp = 100;
+    public int kill;
+    public int Score;
+    public int Wave;
+    public int[] nextWave = { 20,20,20,20,20 }; //20ì´ˆ ë‚˜ì¤‘ì— ìˆ˜ì • ê°€ëŠ¥
+    [Header("#GAME OBJECT")]
+    public Result uiResult;
+
     private bool isPause;
 
     private int wave = 1;
 
-    //°ÔÀÓ score
+    //ê²Œì„ score
     private int score = 0;
-    //°ÔÀÓ¿À¹ö Ã¼Å©
+    //ê²Œì„ì˜¤ë²„ ì²´í¬
     public bool isGameOver { get; private set; }
 
 
@@ -46,20 +62,19 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateAmmoText(magAmmo, remainAmmo, weaponSlotIndex);
     }
 
-
-    //Á¡¼ö Ãß°¡
+    //ì ìˆ˜ ì¶”ê°€
     public void AddScore(int newScore)
     {
         score += newScore;
         UIManager.Instance.UpdateScoreText(score);
     }
-    //¿şÀÌºê º¯°æ
+    //ì›¨ì´ë¸Œ ë³€ê²½
     public void AddWave()
     {
         wave++;
         UIManager.Instance.UpdateWaveText(wave);
     }
-    //°ÔÀÓ¿À¹ö
+    //ê²Œì„ì˜¤ë²„
     public void EndGame()
     {
         isGameOver = true;
@@ -76,8 +91,10 @@ public class GameManager : MonoBehaviour
     public void UpdateHealth(float currentHealth, float maxHealth)
     {
         UIManager.Instance.UpdateHpBar(currentHealth, maxHealth);
-
     }
+
+    //..í…ŒìŠ¤íŠ¸ìš©
+
     void Update()
     {
         //Timer.instance.currentTime -= Time.deltaTime;
@@ -95,9 +112,35 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(GameOverRoutine());
     }
+    void Update()
+    {
+        //Timer.instance.currentTime -= Time.deltaTime;
+        if (Timer.instance.currentTime <= 0)
+        {
+            GameVictroy();
+        }
+    }
+    public void GameStart()
+    {
+        UHD.instance.hp = UHD.instance.maxhp;
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+
+        UHD.instance.uiResult.gameObject.SetActive(true);
+        UHD.instance.uiResult.Lose();
+        Stop();
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+    }
 
     
-
     public void GameVictroy()
     {
         StartCoroutine(GameVictroyRoutine());
@@ -118,7 +161,6 @@ public class GameManager : MonoBehaviour
         UHD.instance.uiResult.Win();
         Stop();
     }
-
 public void Stop()
     {
         //isLive = false;

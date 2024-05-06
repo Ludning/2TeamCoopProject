@@ -40,14 +40,21 @@ public class UIManager : MonoBehaviour
     public TMP_Text waveText; // TextMeshPro 사용
     public GameObject gameOverUI;
     public Slider hpBar;
+    public float maxhp;
+    public float curhp;
     public GameObject pauseUI;
+
+
+    //void Update()
+    //{
+    //    hpBar.value = curhp / maxhp;
+    //}
     public GameObject GameReplayUI;
 
     public void ShowReplayUI()
     {
         GameReplayUI.SetActive(true);
     }
-    
     // 탄창 업데이트 
     public void UpdateAmmoText(int magAmmo, int remainAmmo, int weaponSlotIndex)
     {
@@ -131,5 +138,4 @@ public class UIManager : MonoBehaviour
         pauseUI.SetActive(isPause);
         Debug.Log("isPause true?");
     }
-
 }

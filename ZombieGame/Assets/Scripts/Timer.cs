@@ -5,10 +5,16 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance;
     [SerializeField] TextMeshProUGUI timertext;
-    [SerializeField] float currentTime;
+    [SerializeField] public float currentTime;
 
-    void Update()
+    public void Awake()
+    {
+        instance = this;
+    }
+
+    public void Update()
     {
         if (currentTime > 0)
         {
@@ -24,4 +30,5 @@ public class Timer : MonoBehaviour
         int sec = Mathf.FloorToInt(currentTime % 60);
         timertext.text = string.Format("{0:00}:{1:00}", min, sec);
     }
+
 }
