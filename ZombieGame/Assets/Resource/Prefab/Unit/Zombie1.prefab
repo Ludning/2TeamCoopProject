@@ -2019,10 +2019,10 @@ GameObject:
   - component: {fileID: 7659230149540865004}
   - component: {fileID: 342571522995310230}
   - component: {fileID: 7083532662566708507}
-  - component: {fileID: 7083532662566708484}
-  - component: {fileID: 7083532662566708485}
-  - component: {fileID: 5478429339766919995}
   - component: {fileID: 409988864863207186}
+  - component: {fileID: 7083532662566708485}
+  - component: {fileID: 7083532662566708484}
+  - component: {fileID: 5478429339766919995}
   m_Layer: 0
   m_Name: Zombie1
   m_TagString: Monster
@@ -2103,6 +2103,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &409988864863207186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633895595583902207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de22da5715aaae44a924c3077c7e562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 7083532662566708507}
+--- !u!114 &7083532662566708485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633895595583902207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15927ef87a24c6d40ac11462aa726e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  minTimeBetDamaged: 0.1
 --- !u!114 &7083532662566708484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,20 +2148,6 @@ MonoBehaviour:
   attackDamage: 20
   traceSpeed: 3.5
   isDie: 0
---- !u!114 &7083532662566708485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6633895595583902207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15927ef87a24c6d40ac11462aa726e82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  minTimeBetDamaged: 0.1
 --- !u!136 &5478429339766919995
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2149,18 +2162,6 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &409988864863207186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6633895595583902207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0de22da5715aaae44a924c3077c7e562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6785890369354390765
 GameObject:
   m_ObjectHideFlags: 0
