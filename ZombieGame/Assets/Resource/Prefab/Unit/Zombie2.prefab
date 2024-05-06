@@ -2672,8 +2672,8 @@ GameObject:
   - component: {fileID: 3733642600599665745}
   - component: {fileID: 6150894239265101788}
   - component: {fileID: 6150894239265101762}
-  - component: {fileID: 1656517033345436435}
   - component: {fileID: 4705181416031905505}
+  - component: {fileID: -2502613479065705169}
   m_Layer: 0
   m_Name: Zombie2
   m_TagString: Untagged
@@ -2689,7 +2689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7710666347201454904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.679, y: 0.498, z: 5.31}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2768,22 +2768,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   minTimeBetDamaged: 0.1
---- !u!70 &1656517033345436435
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7710666347201454904}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.9}
-  m_Size: {x: 0.5, y: 1.8}
-  m_Direction: 0
 --- !u!114 &4705181416031905505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2803,6 +2787,20 @@ MonoBehaviour:
   attackDamage: 20
   traceSpeed: 3.5
   isDie: 0
+--- !u!136 &-2502613479065705169
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710666347201454904}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &7797036639139194138
 GameObject:
   m_ObjectHideFlags: 0

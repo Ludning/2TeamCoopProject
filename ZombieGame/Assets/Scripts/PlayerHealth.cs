@@ -13,7 +13,7 @@ public class PlayerHealth : LivingEntity
 
     private void UpdateHpUI()
     {
-
+        UIManager.Instance.UpdateHpBar(health, maxHealth);
     }
 
     protected override void OnEnable()

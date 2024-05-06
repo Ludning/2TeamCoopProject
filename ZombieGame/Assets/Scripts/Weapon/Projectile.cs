@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour, IPoolable
 {
-    float speed;
     Vector3 direction;
     [SerializeField]
     Rigidbody rb;
@@ -16,6 +15,8 @@ public class Projectile : MonoBehaviour, IPoolable
     TrailRenderer trailRenderer;
 
     Vector3 prevPosition;
+
+    float damage;
 
     [SerializeField]
     GameObject hitEnvirPaticle;
@@ -30,8 +31,9 @@ public class Projectile : MonoBehaviour, IPoolable
 
         transform.LookAt(transform.position + normalize);
 
-        float distance = (transform.position - prevPosition).magnitude;//speed * Time.fixedDeltaTime;
-        if (Physics.Raycast(prevPosition, transform.forward, out hit, distance))
+        Vector3 direction = transform.position - prevPosition;
+        //float distance = (transform.position - prevPosition).magnitude;
+        if (Physics.Raycast(prevPosition, direction.normalized, out hit, direction.magnitude))
         {
             // 충돌 처리 로직
             Debug.Log("Hit " + hit.collider.gameObject.name);
@@ -46,7 +48,9 @@ public class Projectile : MonoBehaviour, IPoolable
         if (hit.transform.CompareTag("Monster"))
         {
             hitPaticle = PoolManager.Instance.GetGameObject(hitEnemyPaticle);
-            //hit.transform.GetComponent<IDamageable>().OnDamage();
+            DamageMessage damageMessage = new DamageMessage();
+            damageMessage.damage = damage;
+            hit.transform.GetComponent<IDamageable>().ApplyDamage(damageMessage);
         }
         else
         {
@@ -60,14 +64,14 @@ public class Projectile : MonoBehaviour, IPoolable
         hitPaticle.transform.rotation = Quaternion.LookRotation(hitNormal);
     }
 
-    public void Shot(Transform firePosition, float speed)
+    public void Shot(Transform firePosition, float damage, float speed)
     {
+        this.damage = damage;
         rb.isKinematic = true;
         rb.isKinematic = false;
         this.transform.position = firePosition.position;
         this.transform.rotation = firePosition.rotation;
         direction = firePosition.forward;
-        this.speed = speed;
 
         //이전 위치 기록
         prevPosition = this.transform.position;

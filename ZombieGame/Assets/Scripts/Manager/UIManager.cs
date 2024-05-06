@@ -54,16 +54,20 @@ public class UIManager : MonoBehaviour
         switch(weaponSlotIndex)
         {
             case 0:
-                weapon1AmmoText.text = magAmmo + "/" + remainAmmo;
+                if(weapon1AmmoText != null)
+                    weapon1AmmoText.text = magAmmo + "/" + remainAmmo;
                 break;
             case 1:
-                weapon2AmmoText.text = magAmmo + "/" + remainAmmo;
+                if (weapon2AmmoText != null)
+                    weapon2AmmoText.text = magAmmo + "/" + remainAmmo;
                 break;
             case 2:
-                weapon3AmmoText.text = magAmmo + "/" + remainAmmo;
+                if (weapon3AmmoText != null)
+                    weapon3AmmoText.text = magAmmo + "/" + remainAmmo;
                 break;
             case 3:
-                weapon4AmmoText.text = magAmmo + "/" + remainAmmo;
+                if (weapon4AmmoText != null)
+                    weapon4AmmoText.text = magAmmo + "/" + remainAmmo;
                 break;
         }
         
@@ -84,7 +88,10 @@ public class UIManager : MonoBehaviour
     // 체력바 업데이트
     public void UpdateHpBar(float currentHp, float maxHp)
     {
-        hpBar.value = currentHp / maxHp;
+        if (hpBar != null)
+            hpBar.value = currentHp / maxHp;
+        else
+            Debug.Log("hpBar를 넣지 않았소다!");
     }
 
     // 게임오버UI 액티브

@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour, IMovable
     private Vector2 mouseDelta;
     private CharacterController controller;
     private Animator animator;
+
+    [SerializeField]
+    private PlayerHealth playerHealth;
     //private Transform spine_01;
 
     [SerializeField]
@@ -25,10 +28,10 @@ public class PlayerController : MonoBehaviour, IMovable
     public float mouseSensitivity = 10f; // 마우스 민감도
     private float xRotation = 0f; // 수직 회전을 위한 변수
 
-    [SerializeField]
-    private int playerMaxHP = 100;
-    [SerializeField]
-    private int playerCurrentHP = 100;
+    //[SerializeField]
+    //private int playerMaxHP = 100;
+    //[SerializeField]
+    //private int playerCurrentHP = 100;
 
 
     private void Start()
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour, IMovable
         animator = GetComponent<Animator>();
         //spine_01 = animator.GetBoneTransform(HumanBodyBones.Spine);
         Cursor.lockState = CursorLockMode.Locked;
-        UIManager.Instance.UpdateHpBar(playerCurrentHP, playerMaxHP);
+        //UIManager.Instance.UpdateHpBar(playerCurrentHP, playerMaxHP);
     }
 
     private void Update()
